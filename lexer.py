@@ -6,6 +6,7 @@
 
 import ply.lex as lex
 import sys
+import ast
 
 # Lectura del archivo de entrada
 with open(sys.argv[1], 'r') as content_file:
@@ -13,7 +14,7 @@ with open(sys.argv[1], 'r') as content_file:
 content_file.close()
 
 # Lista del nombre de los tokens
-tokens = ['TkNum', 'TkId']
+tokens = ['TkNum', 'TkId', 'TkCaracter']
 
 # tokens y su respectiva palabra reservada
 reserved = {
@@ -32,7 +33,9 @@ reserved = {
     'from' : 'TkFrom',
     'to' : 'TkTo',
     'if' : 'TkIf',
-    'while' : 'TkWhile'
+    'while' : 'TkWhile',
+    'True' : 'TkTrue',
+    'False' : 'TkFalse'
 }
 
 tokens +=  list(reserved.values())
@@ -43,10 +46,19 @@ def t_TkNum(t):
     t.value = int(t.value)    
     return t
 
+def t_TkCaracter(t):
+    r'\'.\''
+    t.value = eval(t.value)
+    return t
+
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,'TkId')    # Checkeo para palabras reservadas
-    return t
+    if t.type == "TkTrue" or t.type == "TkFalse":
+        t.value = ast.literal_eval(t.value)
+        return t
+    else:
+        return t
 
 # Regla para detectar saltos de lineas
 def t_newline(t):
