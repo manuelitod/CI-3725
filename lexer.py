@@ -78,10 +78,6 @@ t_TkValorAscii = r'\#'
 t_TkConcatenacion = r'\:\:'
 t_TkShift = r'\$'
 
-# Definimos una lista que contendrá los tokens que generan error
-
-ListaError = []
-
 # Booleano que dice si se ha encontrado un token que genere error 
 
 tokens +=  list(reserved.values())
