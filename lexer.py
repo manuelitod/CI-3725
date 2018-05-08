@@ -1,4 +1,4 @@
-# ------------------------------------------------------------
+    # ------------------------------------------------------------
 # lexer.py
 #
 # tokenizer para las expresiones soportadas por nuestro lenguaje
@@ -14,7 +14,11 @@ with open(sys.argv[1], 'r') as content_file:
 content_file.close()
 
 # Lista del nombre de los tokens
-tokens = ['TkNum', 'TkId', 'TkCaracter']
+tokens = ['TkNum', 'TkId', 'TkCaracter', 'TkComa', 'TkPunto', 'TkDosPuntos', 'TkParAbre', 'TkParCierra',
+         'TkCorcheteAbre', 'TkCorcheteCierra', 'TkLlaveAbre', 'TkLlaveCierra', 'TkAsignacion', 'TkSuma', 
+         'TkMult', 'TkResta', 'TkDiv', 'TkMod', 'TkConjuncion', 'TkDisyuncion', 'TkMenor', 'TkMenorIgual',
+          'TkMayor', 'TkMayorIgual', 'TkIgual', 'TkSiguienteCar', 'TkAnteriorCar', 'TkValorAscii',
+         'TkConcatenacion', 'TkShift']
 
 # tokens y su respectiva palabra reservada
 reserved = {
@@ -35,8 +39,47 @@ reserved = {
     'if' : 'TkIf',
     'while' : 'TkWhile',
     'True' : 'TkTrue',
-    'False' : 'TkFalse'
+    'False' : 'TkFalse',
+    'not' : 'TkNegacion'
 }
+
+# tokens de simbolos
+
+t_TkComa = r'\,'
+t_TkPunto = r'\.'
+t_TkDosPuntos = r'\:'
+t_TkParAbre = r'\('
+t_TkParCierra = r'\)'
+t_TkCorcheteAbre = r'\['
+t_TkCorcheteCierra = r'\]'
+t_TkLlaveAbre = r'\{'
+t_TkLlaveCierra = r'\}'
+t_TkAsignacion = r'\<\-'
+
+# tokens de operadores aritmeticos
+t_TkSuma = r'\+'
+t_TkMult = r'\*'
+t_TkResta = r'\-'
+t_TkDiv = r'\/'
+t_TkMod = r'\%'
+t_TkConjuncion = r'\/\\'
+t_TkDisyuncion = r'\\\/'
+t_TkMenor = r'\<'
+t_TkMenorIgual = r'\<\='
+t_TkMayor = r'\>'
+t_TkMayorIgual = r'\>\='
+t_TkIgual = r'\='
+t_TkSiguienteCar = r'\+\+'
+t_TkAnteriorCar = r'\-\-'
+t_TkValorAscii = r'\#'
+t_TkConcatenacion = r'\:\:'
+t_TkShift = r'\$'
+
+# Definimos una lista que contendrá los tokens que generan error
+
+ListaError = []
+
+# Booleano que dice si se ha encontrado un token que genere error 
 
 tokens +=  list(reserved.values())
 
