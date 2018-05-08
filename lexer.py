@@ -8,6 +8,8 @@ import ply.lex as lex
 import sys
 import ast
 
+ListaTokensErrores = []
+
 # Lectura del archivo de entrada
 with open(sys.argv[1], 'r') as content_file:
 	content = 	content_file.read()
@@ -57,6 +59,7 @@ t_TkLlaveCierra = r'\}'
 t_TkAsignacion = r'\<\-'
 
 # tokens de operadores aritmeticos
+
 t_TkSuma = r'\+'
 t_TkMult = r'\*'
 t_TkResta = r'\-'
@@ -119,10 +122,7 @@ def find_column(input, token):
 
 # Regla para manejar error
 def t_error(t):
-    print("Error: Caracter inesperado '%s' en la fila " % t.value[0], t.lineno,",columna", find_column(content, t))
+    ListaTokensErrores.append(t)
+    print("Error: Caracter inesperado '%s' en la fila" % t.value[0], t.lineno,", columna", find_column(content, t))
     t.lexer.skip(1)
-
-# Se construye el lexer
-lexer = lex.lex()
-
 
