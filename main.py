@@ -33,4 +33,6 @@ if (len(ListaTokensErrores) == 0):
 			print(i.type +" " + str(i.lineno) + " " + str(find_column(content, i)), end = '')
 		if (j != len(ListaTokens)):
 			print(",")
+		else:
+			print()
 		j += 1

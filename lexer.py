@@ -11,18 +11,22 @@ import ast
 ListaTokensErrores = []
 
 # Lectura del archivo de entrada
-with open(sys.argv[1], 'r') as content_file:
-	content = 	content_file.read()
-content_file.close()
+try:
+    with open(sys.argv[1], 'r') as content_file:
+        content = 	content_file.read()
+    content_file.close()
+except:
+    print("Error al procesar el archivo de entrada")
+    sys.exit()
 
 # Lista del nombre de los tokens
 tokens = ['TkNum', 'TkId', 'TkCaracter', 'TkComa', 'TkPunto', 'TkDosPuntos', 'TkParAbre', 'TkParCierra',
          'TkCorcheteAbre', 'TkCorcheteCierra', 'TkLlaveAbre', 'TkLlaveCierra', 'TkAsignacion', 'TkSuma', 
          'TkMult', 'TkResta', 'TkDiv', 'TkMod', 'TkConjuncion', 'TkDisyuncion', 'TkMenor', 'TkMenorIgual',
           'TkMayor', 'TkMayorIgual', 'TkIgual', 'TkSiguienteCar', 'TkAnteriorCar', 'TkValorAscii',
-         'TkConcatenacion', 'TkShift']
+         'TkConcatenacion', 'TkShift', 'TkIdError', 'TkPuntoYComa']
 
-# tokens y su respectiva palabra reservada
+# tokens y su respectiva palabra reservaEda
 reserved = {
     'begin': 'TkBegin',
     'with' : 'TkWith',
@@ -49,6 +53,7 @@ reserved = {
 
 t_TkComa = r'\,'
 t_TkPunto = r'\.'
+t_TkPuntoYComa = r'\;'
 t_TkDosPuntos = r'\:'
 t_TkParAbre = r'\('
 t_TkParCierra = r'\)'
@@ -82,6 +87,14 @@ t_TkShift = r'\$'
 
 tokens +=  list(reserved.values())
 
+# Regla para manejar un identificador invalido
+
+def t_TkIdError(t):
+    r'[0-9_]+[a-zA-Z_]+[0-9]*'
+    ListaTokensErrores.append(t)
+    print("Error: Expresion inesperada '%s' en la fila" % t.value, t.lineno,", columna", find_column(content, t))
+    t.lexer.skip(1)
+
 # Expresiones regulares para la construccion de los tokens
 def t_TkNum(t):
     r'\d+'
@@ -89,12 +102,12 @@ def t_TkNum(t):
     return t
 
 def t_TkCaracter(t):
-    r'\'.\''
+    r'\'.\' | \".\"'
     t.value = eval(t.value)
     return t
 
 def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    r'[a-zA-Z][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,'TkId')    # Checkeo para palabras reservadas
     if t.type == "TkTrue" or t.type == "TkFalse":
         t.value = ast.literal_eval(t.value)
@@ -121,4 +134,5 @@ def t_error(t):
     ListaTokensErrores.append(t)
     print("Error: Caracter inesperado '%s' en la fila" % t.value[0], t.lineno,", columna", find_column(content, t))
     t.lexer.skip(1)
+
 
