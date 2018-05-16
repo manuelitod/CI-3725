@@ -8,6 +8,7 @@ import ply.lex as lex
 import sys
 import ast
 
+# Lista para controlar errores
 ListaTokensErrores = []
 
 # Lectura del archivo de entrada
@@ -83,9 +84,8 @@ t_TkValorAscii = r'\#'
 t_TkConcatenacion = r'\:\:'
 t_TkShift = r'\$'
 
-# Booleano que dice si se ha encontrado un token que genere error 
 
-tokens +=  list(reserved.values())
+tokens +=  list(reserved.values()) # Las palabras reservadas se agregan como tokens
 
 # Expresiones regulares para la construccion de los tokens
 def t_TkNum(t):
@@ -93,11 +93,13 @@ def t_TkNum(t):
     t.value = int(t.value)    
     return t
 
+# Regla para los caracteres
 def t_TkCaracter(t):
     r'\'.\''
     t.value = eval(t.value)
     return t
 
+# Regla para los identificadores
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,'TkId')    # Checkeo para palabras reservadas

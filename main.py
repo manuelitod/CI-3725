@@ -6,9 +6,8 @@
 
 from lexer import *
 
-lexer = lex.lex()
-
 # Inicializacion del lexer
+lexer = lex.lex()
 lexer.input(content)
 
 # Lista que contiene todos los tokens hallados
@@ -19,7 +18,7 @@ while True:
     tok = lexer.token()
     if not tok: 
         break      # No more input
-    ListaTokens.append(tok)
+    ListaTokens.append(tok) # Se guardan todos los tokens en una lista
 
 j = 1
 
