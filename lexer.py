@@ -24,7 +24,7 @@ tokens = ['TkNum', 'TkId', 'TkCaracter', 'TkComa', 'TkPunto', 'TkDosPuntos', 'Tk
          'TkCorcheteAbre', 'TkCorcheteCierra', 'TkLlaveAbre', 'TkLlaveCierra', 'TkAsignacion', 'TkSuma', 
          'TkMult', 'TkResta', 'TkDiv', 'TkMod', 'TkConjuncion', 'TkDisyuncion', 'TkMenor', 'TkMenorIgual',
           'TkMayor', 'TkMayorIgual', 'TkIgual', 'TkSiguienteCar', 'TkAnteriorCar', 'TkValorAscii',
-         'TkConcatenacion', 'TkShift', 'TkIdError', 'TkPuntoYComa']
+         'TkConcatenacion', 'TkShift', 'TkPuntoYComa']
 
 # tokens y su respectiva palabra reservaEda
 reserved = {
@@ -87,14 +87,6 @@ t_TkShift = r'\$'
 
 tokens +=  list(reserved.values())
 
-# Regla para manejar un identificador invalido
-
-def t_TkIdError(t):
-    r'[0-9_]+[a-zA-Z_]+[0-9]*'
-    ListaTokensErrores.append(t)
-    print("Error: Expresion inesperada '%s' en la fila" % t.value, t.lineno,", columna", find_column(content, t))
-    t.lexer.skip(1)
-
 # Expresiones regulares para la construccion de los tokens
 def t_TkNum(t):
     r'\d+'
@@ -102,7 +94,7 @@ def t_TkNum(t):
     return t
 
 def t_TkCaracter(t):
-    r'\'.\' | \".\"'
+    r'\'.\''
     t.value = eval(t.value)
     return t
 
