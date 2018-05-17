@@ -1,9 +1,1 @@
-with
-        var contador : !int
-
-
-   begin
-        contador? <- 35 .
-
-
-end
+with for 42 'h' ql.q {} / 4-2
