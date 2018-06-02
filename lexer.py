@@ -25,7 +25,7 @@ tokens = ['TkNum', 'TkId', 'TkCaracter', 'TkComa', 'TkPunto', 'TkDosPuntos', 'Tk
          'TkCorcheteAbre', 'TkCorcheteCierra', 'TkLlaveAbre', 'TkLlaveCierra', 'TkAsignacion', 'TkSuma', 
          'TkMult', 'TkResta', 'TkDiv', 'TkMod', 'TkConjuncion', 'TkDisyuncion', 'TkMenor', 'TkMenorIgual',
           'TkMayor', 'TkMayorIgual', 'TkIgual', 'TkSiguienteCar', 'TkAnteriorCar', 'TkValorAscii',
-         'TkConcatenacion', 'TkShift', 'TkPuntoYComa']
+         'TkConcatenacion', 'TkShift', 'TkPuntoYComa', 'TkEntonces']
 
 # tokens y su respectiva palabra reservaEda
 reserved = {
@@ -45,9 +45,10 @@ reserved = {
     'to' : 'TkTo',
     'if' : 'TkIf',
     'while' : 'TkWhile',
-    'True' : 'TkTrue',
-    'False' : 'TkFalse',
-    'not' : 'TkNegacion'
+    'true' : 'TkTrue',
+    'false' : 'TkFalse',
+    'not' : 'TkNegacion',
+    'otherwise' : 'TkOtherwise'
 }
 
 # tokens de simbolos
@@ -63,6 +64,7 @@ t_TkCorcheteCierra = r'\]'
 t_TkLlaveAbre = r'\{'
 t_TkLlaveCierra = r'\}'
 t_TkAsignacion = r'\<\-'
+t_TkEntonces = r'\-\>'
 
 # tokens de operadores aritmeticos
 
