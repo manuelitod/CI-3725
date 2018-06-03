@@ -22,7 +22,8 @@ def p_inicio(p):
 
 def p_dec(p):
 	'''DEC : DEC TkVar IDENT TkDosPuntos TIPO
-		| TkVar IDENT TkDosPuntos TIPO'''
+		| TkVar IDENT TkDosPuntos TIPO
+		| TkVar '''
 	if (len(p) == 6):
 		p[0] = InstrTree("Lista de Declaraciones", [p[1], p[3], p[5]])
 	else:
@@ -31,9 +32,9 @@ def p_dec(p):
 # Identificadores
 
 def p_ident(p):
-	'''IDENT :   IDENT TkComa TkId
-			| TkId
-			| ASIG'''
+	'''IDENT : TkId
+			| ASIG
+			| IDENT TkComa IDENT'''
 	if (len(p) == 4):
 		p[0] = InstrTree("Identificador", p[2])
 	else:
@@ -46,7 +47,7 @@ def p_tipo(p):
 	'''TIPO :    TkInt
 			| TkChar
 			| TkBool
-			| TkArray'''
+			| TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO '''
 	p[0] = InstrTree("Tipo", p[1])
 
 # Instrucciones generales
@@ -76,8 +77,8 @@ def p_instr1(p):
 # Asignacion 
 
 def p_asig(p):
-	'''ASIG :    TkId TkAsignacion ARIT TkPuntoYComa
-			| TkId TkAsignacion BOOL TkPuntoYComa'''
+	'''ASIG : TkId TkAsignacion EXPR TkPuntoYComa
+ 	| TkId TkAsignacion EXPR'''
 	p[0] = InstrTree("Asignacion", p[3])
 
 # Expresiones Aritmeticas
@@ -90,7 +91,8 @@ def p_arit(p):
 			| ARIT TkMult ARIT
 			| ARIT TkDiv ARIT
 			| ARIT TkMod ARIT
-			| TkValorAscii TkCaracter'''
+			| TkValorAscii TkCaracter
+			| TkId'''
 	if (len(p) == 2):
 		if (p[1] == 'TkNum'):
 			p[0] = Number(p[1])
@@ -200,7 +202,7 @@ def p_expr(p):
 	'''EXPR : CHAR
 			| ARIT
 			| ARRAY
-			| TkId TkaCorcheteAbre ARIT TkCorcheteCierra
+			| TkId TkCorcheteAbre ARIT TkCorcheteCierra
 			| TkId'''
 	if (len(p) == 2):
 		p[0] = InstrTree("Expresion", p[1])
@@ -212,11 +214,11 @@ def p_expr(p):
 def p_array(p):
 	'''ARRAY : ARRAY TkConcatenacion ARRAY
 			 | TkShift ARRAY
-				'''
+			 | TkId'''
 	if (len(p) == 4):
 		p[0] = InstrTree("Arreglo", [p[1], p[3]])
 	else:
-		p[0] = UniOp("Arreglo", p[1], p[2])
+		p[0] = UniOp("Shift", p[1], p[2])
 
 # Detección de errores
 def p_error(p):

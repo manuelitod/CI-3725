@@ -6,7 +6,6 @@
 
 import ply.lex as lex
 import sys
-import ast
 
 # Lista para controlar errores
 ListaTokensErrores = []
@@ -106,11 +105,11 @@ def t_TkCaracter(t):
 def t_ID(t):
     r'[a-zA-Z][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,'TkId')    # Checkeo para palabras reservadas
-    if t.type == "TkTrue" or t.type == "TkFalse":
-        t.value = ast.literal_eval(t.value)
-        return t
-    else:
-        return t
+    if t.type == "TkTrue":
+        t.value = True
+    elif t.type == "TkFalse":
+        t.value = False
+    return t
 
 # Regla para detectar saltos de lineas
 def t_newline(t):

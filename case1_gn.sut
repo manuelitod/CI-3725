@@ -1,4 +1,18 @@
+with
+    var n : int
+    var j: array [n] of int
+    var x,y,z : array [n] of array[n] of bool
 begin
-    if a = b ->
-        print x
+    read n;
+    while true ->
+        with
+            var tmp : int
+        begin
+            tmp <- f2;
+            f2 <- f1;
+            f1 <- f1 + tmp;
+            n <- n - 1;
+        end
+    end
+    print f2;
 end
