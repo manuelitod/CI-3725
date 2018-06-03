@@ -25,10 +25,11 @@ tokens = ['TkNum', 'TkId', 'TkCaracter', 'TkComa', 'TkPunto', 'TkDosPuntos', 'Tk
          'TkCorcheteAbre', 'TkCorcheteCierra', 'TkLlaveAbre', 'TkLlaveCierra', 'TkAsignacion', 'TkSuma', 
          'TkMult', 'TkResta', 'TkDiv', 'TkMod', 'TkConjuncion', 'TkDisyuncion', 'TkMenor', 'TkMenorIgual',
           'TkMayor', 'TkMayorIgual', 'TkIgual', 'TkSiguienteCar', 'TkAnteriorCar', 'TkValorAscii',
-         'TkConcatenacion', 'TkShift', 'TkPuntoYComa', 'TkEntonces']
+         'TkConcatenacion', 'TkShift', 'TkPuntoYComa', 'TkHacer']
 
 # tokens y su respectiva palabra reservaEda
 reserved = {
+    'step' : 'TkStep',
     'begin': 'TkBegin',
     'with' : 'TkWith',
     'end' : 'TkEnd',
@@ -64,7 +65,7 @@ t_TkCorcheteCierra = r'\]'
 t_TkLlaveAbre = r'\{'
 t_TkLlaveCierra = r'\}'
 t_TkAsignacion = r'\<\-'
-t_TkEntonces = r'\-\>'
+t_TkHacer = r'\-\>'
 
 # tokens de operadores aritmeticos
 
