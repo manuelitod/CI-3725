@@ -183,13 +183,15 @@ def p_deter(p):
 def p_deter0(p):
 	'''DETER0 :  TkStep ARIT TkHacer INSTR TkEnd
 			| TkHacer INSTR TkEnd'''
-	p[0] = InstrTree("Iteracion Determinada", [p[2], p[4]])
-
+	if (len(p) == 6):
+		p[0] = InstrTree("Iteracion Determinada", [p[2], p[4]])
+	else:
+		p[0] = InstrTree("Iteracion Determinada", p[2])
 # Entrada y salida
 
 def p_i_o(p):
-	'''I_O :  TkRead TkId
-			| TkPrint EXPR'''
+	'''I_O :  TkRead TkId TkPuntoYComa
+			| TkPrint EXPR TkPuntoYComa'''
 	p[0] = UniOp("Entrada o Salida", p[1], p[2])
 
 # Expresiones en general
