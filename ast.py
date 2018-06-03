@@ -1,7 +1,5 @@
 import ply.yacc as yacc
 import re
-from structs import *
-from lexNEO import *
 
 class Expr: pass
 
@@ -13,7 +11,7 @@ class BinOp(Expr):
         self.op = op
 
 class UniOp(Expr):
-    def __init__(self,term,op, typ):
+    def __init__(self,typ,op, term):
         self.typ = typ
         self.term = term
         self.op = op
@@ -34,8 +32,13 @@ class Bool(Expr):
         self.type = "Bool"
         self.value = value
 
-class Node:
-    def __init__(self,stamp , children = None,instr = None):
+class Char(Expr):
+    def __init__(self,value):
+        self.type = "Char"
+        self.value = value
+
+class InstrTree:
+    def __init__(self ,stamp , children = None,instr = None):
          self.stamp = stamp
          if children:
               self.children = children
