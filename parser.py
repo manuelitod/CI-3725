@@ -145,7 +145,7 @@ def p_char(p):
 			| TkCaracter TkSiguienteCar
 			| TkCaracter TkAnteriorCar'''
 	if (len(p) == 2):
-		if (p[1].type == 'TkId'):
+		if (p[1] == 'TkId'):
 			p[0] = Ident(p[1])
 		else:
 			p[0] == Char(p[1])
@@ -189,14 +189,15 @@ def p_deter0(p):
 
 def p_i_o(p):
 	'''I_O :  TkRead TkId
-			| TkBegin EXPR'''
+			| TkPrint EXPR'''
 	p[0] = UniOp("Entrada o Salida", p[1], p[2])
 
 # Expresiones en general
 
 def p_expr(p):
 	'''EXPR : 	  CHAR
-			| ARIT'''
+			| ARIT
+			| TkId'''
 	p[0] = InstrTree("Expresion", p[1])
 
 # Detección de errores
