@@ -3,6 +3,10 @@ import re
 from structs import *
 from lexNEO import *
 
+global Tree
+
+Tree = InstrTree()
+
 # Símbolo inicial
 
 def p_inicio(p):
