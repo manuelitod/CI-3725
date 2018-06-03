@@ -197,10 +197,26 @@ def p_i_o(p):
 # Expresiones en general
 
 def p_expr(p):
-	'''EXPR : 	  CHAR
+	'''EXPR : CHAR
 			| ARIT
+			| ARRAY
+			| TkId TkaCorcheteAbre ARIT TkCorcheteCierra
 			| TkId'''
-	p[0] = InstrTree("Expresion", p[1])
+	if (len(p) == 2):
+		p[0] = InstrTree("Expresion", p[1])
+	else:
+		p[0] = InstrTree("Indexacion", p[3])
+
+# Arreglos
+
+def p_array(p):
+	'''ARRAY : ARRAY TkConcatenacion ARRAY
+			 | TkShift ARRAY
+				'''
+	if (len(p) == 4):
+		p[0] = InstrTree("Arreglo", [p[1], p[3]])
+	else:
+		p[0] = UniOp("Arreglo", p[1], p[2])
 
 # Detección de errores
 def p_error(p):
@@ -215,5 +231,5 @@ precedence = (
 	('left', 'NEGA', 'TkMult', 'TkDiv', 'TkMod', 'TkSuma', 'TkResta'),
 	('left', 'TkNegacion', 'TkConjuncion', 'TkDisyuncion'),
 	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar'),
-	#('left', 'TkIndexacion', 'TkShift', 'TkConcatenacion')
+	('left', 'TkCorcheteAbre', 'TkShift', 'TkConcatenacion')
 	)
