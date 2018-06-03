@@ -1,0 +1,10 @@
+with
+	var b : bool
+    var x : bool
+begin
+    while b = x < y -> 
+        if b ->
+            x++
+        end
+    end
+end

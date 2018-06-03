@@ -1,5 +1,7 @@
 import ply.yacc as yacc
 import re
+from ast import *
+from lexer import *
 
 global Tree
 
@@ -82,7 +84,6 @@ def p_asig(p):
 
 def p_arit(p):
 	'''ARIT : TkNum
-			| TkId
 			| TkParAbre ARIT TkParCierra
 			| ARIT TkSuma ARIT
 			| ARIT TkResta ARIT
@@ -91,7 +92,7 @@ def p_arit(p):
 			| ARIT TkMod ARIT
 			| TkValorAscii TkCaracter'''
 	if (len(p) == 2):
-		if (p[1].type == 'TkNum'):
+		if (p[1] == 'TkNum'):
 			p[0] = Number(p[1])
 		else:
 			p[0] = Ident(p[1])
@@ -114,15 +115,14 @@ def p_nega(p):
 def p_bool(p):
 	'''BOOL : BOOL TkConjuncion BOOL
 			| BOOL TkDisyuncion BOOL
-			| BOOL TkMenor BOOL
-			| BOOL TkMenorIgual BOOL
-			| BOOL TkMayor BOOL
-			| BOOL TkMayorIgual BOOL
-			| BOOL TkIgual BOOL
+			| ARIT TkMenor ARIT
+			| ARIT TkMenorIgual ARIT
+			| ARIT TkMayor ARIT
+			| ARIT TkMayorIgual ARIT
+			| EXPR TkIgual EXPR
 			| TkParAbre BOOL TkParCierra
 			| TkFalse
 			| TkTrue
-			| TkId
 			| TkNegacion BOOL'''
 	if (len(p) == 4):
 		if ((p[1] == '(') and (p[3] == ')')):
@@ -132,7 +132,7 @@ def p_bool(p):
 	elif (len(p) == 3):
 		p[0] = UniOp("Expresion Booleana", p[2], p[1])
 	else:
-		if (p[1].type == 'TkId'):
+		if (p[1] == 'TkId'):
 			p[0] = Ident(p[1])
 		else:
 			p[0] == Bool(p[1])
@@ -141,8 +141,7 @@ def p_bool(p):
 # Expresiones con caracteres
 
 def p_char(p):
-	'''CHAR : TkId
-			| TkCaracter
+	'''CHAR : TkCaracter
 			| TkCaracter TkSiguienteCar
 			| TkCaracter TkAnteriorCar'''
 	if (len(p) == 2):
@@ -157,8 +156,8 @@ def p_char(p):
 # Condicionales general
 
 def p_cond(p):
-	'''COND : 	  TkIf TkHacer INSTR COND0'''
-	p[0] = InstrTree("Condicional General", [p[3], p[4]])
+	'''COND : 	  TkIf BOOL TkHacer INSTR COND0'''
+	p[0] = InstrTree("Condicional General", [p[2], p[4], p[5]])
 
 # Condicionales 
 
@@ -169,41 +168,49 @@ def p_cond0(p):
 
 # Iteracion indeterminada
 
-def indeter(p):
+def p_indeter(p):
 	'''INDETER : TkWhile BOOL TkHacer INSTR TkEnd'''
 	p[0] = InstrTree("Iteracion Indeterminada", [p[2], p[4]])
 
 # Iteracion determinada general
 
-def deter(p):
+def p_deter(p):
 	'''DETER :   TkFor TkId TkFrom ARIT TkTo ARIT DETER0'''
 	p[0] = InstrTree("Iteracion Determinada General", [p[4], p[6], p[7]])
 
 # Iteracion determinada
 
-def deter0(p):
+def p_deter0(p):
 	'''DETER0 :  TkStep ARIT TkHacer INSTR TkEnd
 			| TkHacer INSTR TkEnd'''
 	p[0] = InstrTree("Iteracion Determinada", [p[2], p[4]])
 
 # Entrada y salida
 
-def i_o(p):
+def p_i_o(p):
 	'''I_O :  TkRead TkId
 			| TkBegin EXPR'''
 	p[0] = UniOp("Entrada o Salida", p[1], p[2])
 
 # Expresiones en general
 
-def expr(p):
+def p_expr(p):
 	'''EXPR : 	  CHAR
-			| BOOL
 			| ARIT'''
 	p[0] = InstrTree("Expresion", p[1])
 
+# Detección de errores
+def p_error(p):
+    if (not p):
+        return
+    print("Error de sintaxis en la entrada.\nError: '" + str(p.value) +\
+     "' ubicado en la fila {:d}, columna {:d}.".format(p.lineno,\
+      find_column(content, p)))
+    sys.exit()
+
 precedence = (
-	('left', 'NEGA', 'TkMul', 'TkDiv', 'TkMod', 'TkSuma', 'TkResta')
-	('left', 'TkNegacion', 'TkConjuncion', 'TkDisyuncion')
-	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar')
-	('left', 'TkIndexacion', 'TkShift', 'TkConcatenacion')
+	('left', 'NEGA', 'TkMult', 'TkDiv', 'TkMod', 'TkSuma', 'TkResta'),
+	('left', 'TkNegacion', 'TkConjuncion', 'TkDisyuncion'),
+	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar'),
+	#('left', 'TkIndexacion', 'TkShift', 'TkConcatenacion')
 	)

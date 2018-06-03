@@ -5,6 +5,7 @@
 # ------------------------------------------------------------
 
 from lexer import *
+from parser import *
 
 # Inicializacion del lexer
 lexer = lex.lex()
@@ -35,3 +36,7 @@ if (len(ListaTokensErrores) == 0):
 		else:
 			print()
 		j += 1
+
+lexer.lineno = 1
+parser = yacc.yacc()
+parser.parse(content)
