@@ -39,4 +39,5 @@ if (len(ListaTokensErrores) == 0):
 
 lexer.lineno = 1
 parser = yacc.yacc()
-parser.parse(content)
+tree = parser.parse(content)
+tree.print_tree()
