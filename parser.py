@@ -166,7 +166,10 @@ def p_cond(p):
 def p_cond0(p):
 	'''COND0 :   TkOtherwise TkHacer INSTR
 			| TkEnd'''
-	p[0] = InstrTree("Condicional", p[3])
+	if ( len(p) == 4):
+		p[0] = InstrTree("Condicional", p[3])
+	else:
+		p[0] =  InstrTree("CondicionalEnd", p[1])
 
 # Iteracion indeterminada
 

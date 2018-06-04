@@ -39,9 +39,9 @@ class Char(Expr):
 
 class InstrTree:
     def __init__(self ,stamp , children = None,instr = None):
-         self.stamp = stamp
-         if children:
-              self.children = children
-         else:
-              self.children = [ ]
-         self.instr = instr
+        self.stamp = stamp
+        if children:
+            self.children = children
+        else:
+            self.children = [ ]
+        self.instr = instr
