@@ -11,10 +11,10 @@ class InstrTree:
         self.instr = instr
     
     def print_tree(self):
-        print(self.stamp)
+        if self.instr != None: print(self.instr)
         if self.children != None:
             for children in self.children:
-                children.print_tree()
-        else:
-            for instr in self.instr:
-                instr.print_tree()
+                if type(children) is not str:
+                    children.print_tree()
+                else:
+                    print(children, end='')

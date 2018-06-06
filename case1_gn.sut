@@ -1,8 +1,6 @@
 with
-    var contador, bar <- 2 : int
+    var x<-2 : array[j] of bool
 begin
-    bar <- 42;
-    if bar > 2 ->
-        contadorInterno <- 35;
-    end
+    x <- 2+2+4;
+    y <- 4;
 end
