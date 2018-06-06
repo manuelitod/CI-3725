@@ -29,7 +29,8 @@ def p_dec(p):
 def p_ident(p):
 	'''IDENT : TkId
 			| ASIG_ID
-			| IDENT TkComa IDENT'''
+			| IDENT TkComa TkId
+			| IDENT TkComa ASIG_ID'''
 	if (len(p) == 4):
 		p[0] = InstrTree("Identificadores", [p[1], p[3]], [p[2]])
 	else:
