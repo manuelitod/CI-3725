@@ -52,29 +52,21 @@ def p_tipo(p):
 	else:
 		p[0] = InstrTree("Tipo Arreglo", [p[3], p[6]], ["declaracion de array"])
 
-# Instrucciones generales
-
-def p_instr(p):
-	'''INSTR :   SEC
-			| INSTR1'''
-	p[0] = InstrTree("Instruccion General", [p[1]])
-
-# Secuenciacion
-
-def p_sec(p):
-	'''SEC : INSTR INSTR1'''
-	p[0] = InstrTree("Secuenciacion", [p[1], p[2]])
-
 # Instrucciones
 
-def p_instr1(p):
-	'''INSTR1 :  ASIG
+def p_instr(p):
+	'''INSTR :  ASIG
 			| I_O
 			| COND
 			| DETER
 			| INDETER
-			| INICIO'''
-	p[0] = InstrTree("Instruccion", [p[1]])
+			| INICIO
+			| ASIG INSTR
+			| I_O INSTR
+			| INICIO INSTR
+			| DETER INSTR
+			| INDETER INSTR'''
+	p[0] = InstrTree("Instruccion General", [p[1]])
 
 # Asignacion 
 
