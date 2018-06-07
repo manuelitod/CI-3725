@@ -19,12 +19,18 @@ def p_inicio(p):
 # Lista de Declaraciones
 
 def p_dec(p):
-	'''DEC : DEC TkVar IDENT TkDosPuntos TIPO
+	'''DEC : DEC TkVar DEC0
 		| TkVar IDENT TkDosPuntos TIPO '''
-	if (len(p) == 6):
-		p[0] = InstrTree("Lista de Varias Declaraciones", [p[1], p[3], p[5]], p[2])
+	if (len(p) == 4):
+		p[0] = InstrTree("Lista de Varias Declaraciones", [p[1], p[3]], None)
 	else:
 		p[0] = InstrTree("Lista de Declaraciones", [p[2], p[4]], p[1])
+
+# Lista de varias declaraciones
+
+def p_dec0(p):
+	'''DEC0 : IDENT TkDosPuntos TIPO'''
+	p[0] = InstrTree("Varias declaraciones", [p[1], p[3]], "var")
 
 # Identificadores
 
@@ -34,7 +40,11 @@ def p_ident(p):
 			| IDENT TkComa TkId
 			| IDENT TkComa ASIG_ID'''
 	if (len(p) == 4):
-		p[0] = InstrTree("Identificadores", [p[1], p[3]], None)
+		if type(p[3]) is InstrTree:
+			p[0] = InstrTree("Identificadores", [p[1], p[3]], None)
+		else:
+			p[0] = InstrTree("Identificadores", [p[1], 
+		InstrTree("Identificador", None, p[3])], None)
 	else:
 		if(p[1] is not InstrTree):
 			p[0] = InstrTree("Identificador", None, p[1])
@@ -53,7 +63,7 @@ def p_tipo(p):
 		tipo = 	InstrTree("", None, p[1])
 		p[0] = InstrTree("Tipo", [tipo], "tipo")
 	else:
-		p[0] = InstrTree("Tipo Arreglo", [p[3], p[6]], "declaracion de array")
+		p[0] = InstrTree("Tipo Arreglo", [InstrTree("", [p[3]], "array"), p[6]], "tipo")
 
 # Instrucciones
 

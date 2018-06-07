@@ -1,5 +1,6 @@
 with
 var n, f1 <- 1, f2 <- 0 : int
+var x,y,z : array[m] of int
 begin
 hola.2*3
 read n;
