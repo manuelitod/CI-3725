@@ -285,10 +285,11 @@ def p_error(p):
     sys.exit()
 
 precedence = (
-	('nonassoc', 'TkMenor', 'TkMayor'),
-	('nonassoc', 'TkMenorIgual', 'TkMayorIgual'),
-	('left', 'TkCorcheteAbre','TkShift', 'TkConcatenacion'),
-	('left', 'NEGA', 'TkMult', 'TkDiv', 'TkMod', 'TkSuma', 'TkResta'),
-	('left', 'TkNegacion', 'TkConjuncion', 'TkDisyuncion'),
-	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar')
+	('left' 'TkMenor', 'TkMayor', 'TkMenorIgual', 'TkMayorIgual', 'TkIgual', 'TkDesigual'),
+	('left', 'TkSuma', 'TkResta'),
+	('left', 'TkMult', 'TkDiv', 'TkMod'),
+	('left', 'TkConjuncion', 'TkDisyuncion'),
+	('left', 'TkNegacion', 'NEGA'),
+	('left', 'TkConcatenacion'),
+	('left', 'TkShift'),
 	)
