@@ -40,4 +40,6 @@ if (len(ListaTokensErrores) == 0):
 lexer.lineno = 1
 parser = yacc.yacc()
 tree = parser.parse(content)
-tree.print_tree()
+if tree != None:
+	print("---AST---")
+	tree.print_tree()

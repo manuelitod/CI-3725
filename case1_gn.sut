@@ -1,6 +1,7 @@
 with
 var n, f1 <- 1, f2 <- 0 : int
 begin
+hola.2*3
 read n;
 while n > 0 ->
 with
@@ -10,6 +11,9 @@ tmp <- f2;
 f2 <- f1;
 f1 <- f1 + tmp;
 n <- n - 1;
+if x ->
+    print hola;
+end
 end
 end
 print f2;

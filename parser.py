@@ -10,7 +10,9 @@ def p_inicio(p):
 	'''INICIO :  TkWith DEC TkBegin INSTR TkEnd
 			| TkBegin INSTR TkEnd'''
 	if (len(p) == 6):
-		p[0] = InstrTree("Inicio", [p[4]], "begin")
+		var = InstrTree("", [p[2]], "with")
+		instr = InstrTree("", [p[4]], "begin")
+		p[0] = InstrTree("Inicio", [var, instr], None)
 	else:
 		p[0] = InstrTree("Inicio", [p[2]], "begin") 
 
@@ -32,10 +34,10 @@ def p_ident(p):
 			| IDENT TkComa TkId
 			| IDENT TkComa ASIG_ID'''
 	if (len(p) == 4):
-		p[0] = InstrTree("Identificadores", [p[1], p[3]], p[2])
+		p[0] = InstrTree("Identificadores", [p[1], p[3]], None)
 	else:
 		if(p[1] is not InstrTree):
-			p[0] = InstrTree("Identificador", None , p[1])
+			p[0] = InstrTree("Identificador", None, p[1])
 		else:
 			p[0] = InstrTree("Asignacion", [p[1]], None)
 
@@ -48,7 +50,8 @@ def p_tipo(p):
 			| TkBool
 			| TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO '''
 	if (len(p) == 2):
-		p[0] = InstrTree("Tipo", None, p[1])
+		tipo = 	InstrTree("", None, p[1])
+		p[0] = InstrTree("Tipo", [tipo], "tipo")
 	else:
 		p[0] = InstrTree("Tipo Arreglo", [p[3], p[6]], "declaracion de array")
 
@@ -61,16 +64,24 @@ def p_instr(p):
 			| DETER
 			| INDETER
 			| INICIO
+			| PUNTO
 			| ASIG INSTR
 			| I_O INSTR
 			| INICIO INSTR
 			| DETER INSTR
 			| INDETER INSTR
-			| COND INSTR'''
+			| COND INSTR
+			| PUNTO INSTR'''
 	if len(p) == 2:
 		p[0] = InstrTree("Instruccion General", [p[1]])
 	else:
 		p[0] = InstrTree("Instruccion General", [p[1], p[2]])
+
+# Punto
+
+def p_punto(p):
+	'''PUNTO : TkId TkPunto ARIT'''
+	p[0] = InstrTree("Punto", [InstrTree("", None, p[1]),p[3]], p[2])
 
 # Asignacion 
 
@@ -140,10 +151,7 @@ def p_bool(p):
 	elif (len(p) == 3):
 		p[0] = InstrTree("Expresion Booleana", [p[2]], p[1])
 	else:
-		if (p[1] == 'TkId'):
-			p[0] = InstrTree("Identificador", None, p[1])
-		else:
-			p[0] == InstrTree("Booleano", None, p[1])
+		p[0] = InstrTree("Condicion simple", None, p[1])
 
 
 # Expresiones con caracteres
@@ -168,21 +176,34 @@ def p_cond(p):
 			|  TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd'''
 	
 	if len(p) == 6:
-		p[0] = InstrTree("Condicional", [p[2],p[4]], "Hacer If")
+		p[0] = InstrTree("Condicional", 
+		[InstrTree("", [p[2]], "condicion"),
+		InstrTree("", [p[4]], "exito")], 
+		"if")
 	else:
-		p[0] = InstrTree("Condicional and otherwise", [p[2],p[4],p[7]], "Condicional and otherwise")
+		p[0] = InstrTree("Condicional and otherwise", 
+		[InstrTree("", [p[2]], "condicion"),
+		InstrTree("", [p[4]], "exito"),
+		InstrTree("", [p[7]], "fracaso")], 
+		"ifot")
+
 
 # Iteracion indeterminada
 
 def p_indeter(p):
 	'''INDETER : TkWhile BOOL TkHacer INSTR TkEnd'''
-	p[0] = InstrTree("Iteracion Indeterminada", [p[2], p[4]], p[1])
+	cond = InstrTree("", [p[2]], "condicion")
+	instr = InstrTree("", [p[4]], "instruccion")
+	p[0] = InstrTree("Iteracion Indeterminada", [cond, instr], p[1])
 
 # Iteracion determinada general
 
 def p_deter(p):
 	'''DETER :   TkFor TkId TkFrom ARIT TkTo ARIT DETER0'''
-	p[0] = InstrTree("Iteracion Determinada General", [InstrTree("Identificador", None, p[1]), p[4], p[6], p[7]], p[1])
+	id = InstrTree("Identificador", None, p[2])
+	p[0] = InstrTree("Iteracion Determinada General", [InstrTree("",[id],"variable"), 
+	InstrTree("", [p[4]], "inicio"), 
+	InstrTree("", [p[6]], "final"), p[7]], p[1])
 
 # Iteracion determinada
 
@@ -190,9 +211,12 @@ def p_deter0(p):
 	'''DETER0 :  TkStep ARIT TkHacer INSTR TkEnd
 			| TkHacer INSTR TkEnd'''
 	if (len(p) == 6):
-		p[0] = InstrTree("Iteracion Determinada Step", [p[2], p[4]], p[1])
+		step = InstrTree("", [p[2]], "step")
+		instr = InstrTree("", [p[4]], "instruccion")
+		p[0] = InstrTree("Iteracion Determinada Step", [step, instr], None)
 	else:
-		p[0] = InstrTree("Iteracion Determinada", [p[2]], p[1])
+		instr = InstrTree("", [p[2]], None)
+		p[0] = InstrTree("Iteracion Determinada", [instr], "instruccion")
 
 # Entrada y salida
 
@@ -237,6 +261,7 @@ def p_array(p):
 # Detección de errores
 def p_error(p):
     if (not p):
+        print("Error de sintaxis")
         return
     print("Error de sintaxis en la entrada.\nError: '" + str(p.value) +\
      "' ubicado en la fila {:d}, columna {:d}.".format(p.lineno,\

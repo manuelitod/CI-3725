@@ -1,6 +1,6 @@
 begin
-    for i from 1 to 360 ->
+    for i from 1 to 360 step 2*2-54+76 ->
     	print i;
-    	i=0123;
-    end;
-end;
+    	i <- 0123;
+    end
+end

@@ -1,8 +1,9 @@
+with
+	var contador, bar : int
 begin
-	var a : char;
-    for i from 1 to 360 ->
-    	Print i;
-    	c='a';
-    	i=0123;
-    end;
-end;
+	bar <- 42;
+	if bar > 2 ->
+		contadorInterno <- 35;
+		print j;
+	end
+end
