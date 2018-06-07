@@ -1,4 +1,5 @@
 begin
-	__Hola;
-	a = 'a2''
+	prueba <- 2*(2 + 4);
+	prueba <- $a::b[6];
+	prueba <- $a::(b[6*3]);
 end

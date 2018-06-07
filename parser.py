@@ -155,7 +155,7 @@ def p_bool(p):
 
 	if (len(p) == 4):
 		if ((p[1] == '(') and (p[3] == ')')):
-			p[0] = InstrTree("Expresion Booleana", [p[2]], "Parentesis")
+			p[0] = InstrTree("Expresion Booleana", [p[2]], "()")
 		else:
 			p[0] = InstrTree("Expresion Booleana", [p[1], p[3]], p[2])
 	elif (len(p) == 3):
@@ -259,12 +259,18 @@ def p_expr(p):
 def p_array(p):
 	'''ARRAY : ARRAY TkConcatenacion ARRAY
 			 | TkShift ARRAY
-			 | TkId TkCorcheteAbre ARIT TkCorcheteCierra
-			 | TkId'''
+			 | ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+			 | TkId
+			 | TkParAbre ARRAY TkParCierra'''
 	if (len(p) == 4):
-		p[0] = InstrTree("Arreglo", [p[1], p[3]], p[2])
-	elif ( len(p) == 3) :
-		p[0] = InstrTree("Shift", [p[1]], p[2])
+		if ((p[1] == '(') and (p[3] == ')')):
+			p[0] = InstrTree("Expresion array", [p[2]], "()")
+		else:
+			p[0] = InstrTree("Concatenacion array", [p[1], p[3]], p[2])
+	elif ( len(p) == 3 ) :
+		p[0] = InstrTree("Shift", [p[2]], p[1])
+	elif ( len(p) == 5 ):
+		p[0] = InstrTree("Indexacion", [p[1], p[3]], "[]")
 	else:
 		p[0] = InstrTree("Identificador", None, p[1])
 
@@ -281,8 +287,8 @@ def p_error(p):
 precedence = (
 	('nonassoc', 'TkMenor', 'TkMayor'),
 	('nonassoc', 'TkMenorIgual', 'TkMayorIgual'),
+	('left', 'TkCorcheteAbre','TkShift', 'TkConcatenacion'),
 	('left', 'NEGA', 'TkMult', 'TkDiv', 'TkMod', 'TkSuma', 'TkResta'),
 	('left', 'TkNegacion', 'TkConjuncion', 'TkDisyuncion'),
-	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar'),
-	('left', 'TkCorcheteAbre', 'TkShift', 'TkConcatenacion')
+	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar')
 	)

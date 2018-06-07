@@ -9,4 +9,7 @@ begin
 		print x;
 		print y;
 	end
+	x <- a::b;
+	y <- $a;
+	j <- a[4];
 end
