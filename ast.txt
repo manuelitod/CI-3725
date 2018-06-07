@@ -1,0 +1,88 @@
+---AST---
+begin
+	<-
+		a
+		True
+---AST---
+begin
+	if
+		condicion
+			h
+		exito
+			print
+				x
+---AST---
+	with
+		var
+			x
+			<-
+				y
+				z
+			tipo
+				bool
+	begin
+		print
+			x
+---AST---
+	with
+		var
+			x
+			tipo
+				array
+					m
+				tipo
+					bool
+	begin
+		print
+			x
+---AST---
+	begin
+		while
+			condicion
+				n
+			instruccion
+				print
+					j
+---AST---
+	begin
+		ifot
+			condicion
+				>
+					bar
+					2
+			exito
+				<-
+					contadorInterno
+					35
+				print
+					j
+			fracaso
+				print
+					x
+				print
+					y
+---AST---
+	with
+		var
+			x
+			size
+				m
+			tipo
+				bool
+	begin
+		ifot
+			condicion
+				>
+					bar
+					2
+			exito
+				<-
+					contadorInterno
+					35
+				print
+					j
+			fracaso
+				print
+					x
+				print
+					y

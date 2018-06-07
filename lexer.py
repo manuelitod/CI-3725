@@ -1,4 +1,12 @@
-    # ------------------------------------------------------------
+# --------------------
+
+#Integrantes: 
+#Manuel Rodriguez 13-11223
+#Ian Goldberg 14-10406
+
+# ---------------------
+
+# ------------------------------------------------------------
 # lexer.py
 #
 # tokenizer para las expresiones soportadas por nuestro lenguaje

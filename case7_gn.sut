@@ -1,5 +1,11 @@
+with
+var x : array[m[6]] of bool
 begin
-if h ->
-	print x;
-end
+	if bar > 2 ->
+		contadorInterno <- 35;
+		print j;
+	otherwise ->
+		print x;
+		print y;
+	end
 end

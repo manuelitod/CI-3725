@@ -1,3 +1,11 @@
+# --------------------
+
+#Integrantes: 
+#Manuel Rodriguez 13-11223
+#Ian Goldberg 14-10406
+
+# ---------------------
+
 import ply.yacc as yacc
 import re
 from ast import *
@@ -40,13 +48,13 @@ def p_ident(p):
 			| IDENT TkComa TkId
 			| IDENT TkComa ASIG_ID'''
 	if (len(p) == 4):
-		if type(p[3]) is InstrTree:
+		if (type(p[3]) is InstrTree):
 			p[0] = InstrTree("Identificadores", [p[1], p[3]], None)
 		else:
 			p[0] = InstrTree("Identificadores", [p[1], 
 		InstrTree("Identificador", None, p[3])], None)
 	else:
-		if(p[1] is not InstrTree):
+		if(type(p[1]) is not InstrTree):
 			p[0] = InstrTree("Identificador", None, p[1])
 		else:
 			p[0] = InstrTree("Asignacion", [p[1]], None)
@@ -63,7 +71,7 @@ def p_tipo(p):
 		tipo = 	InstrTree("", None, p[1])
 		p[0] = InstrTree("Tipo", [tipo], "tipo")
 	else:
-		p[0] = InstrTree("Tipo Arreglo", [InstrTree("", [p[3]], "array"), p[6]], "tipo")
+		p[0] = InstrTree("Tipo Arreglo", [InstrTree("",[p[3]], "size"), p[6]], "array")
 
 # Instrucciones
 
