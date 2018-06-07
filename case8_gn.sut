@@ -2,4 +2,5 @@ begin
 	prueba <- 2*(2 + 4);
 	prueba <- $a::b[6];
 	prueba <- $a::(b[6*3]);
+	a <- 'h'++;
 end

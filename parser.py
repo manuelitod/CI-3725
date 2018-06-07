@@ -168,13 +168,11 @@ def p_bool(p):
 
 def p_char(p):
 	'''CHAR : TkCaracter
-			| TkCaracter TkSiguienteCar
-			| TkCaracter TkAnteriorCar'''
+			| CHAR TkSiguienteCar
+			| CHAR TkAnteriorCar
+			| TkId'''
 	if (len(p) == 2):
-		if (p[1] == 'TkId'):
-			p[0] = InstrTree("Identificador", None, p[1])
-		else:
-			p[0] = InstrTree("Caracter", None, p[1])
+		p[0] = InstrTree("Caracter", None, p[1])
 	else:
 		p[0] = InstrTree("Expresion con Caracteres", [p[1]], p[2])
 
