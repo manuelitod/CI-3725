@@ -1,3 +1,5 @@
 begin
+    print x;
     x <- 2 + 2 + 2;
+    y <- 2*(3+4);
 end

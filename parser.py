@@ -10,9 +10,9 @@ def p_inicio(p):
 	'''INICIO :  TkWith DEC TkBegin INSTR TkEnd
 			| TkBegin INSTR TkEnd'''
 	if (len(p) == 6):
-		p[0] = InstrTree("Inicio", [p[4]], "program")
+		p[0] = InstrTree("Inicio", [p[4]], "begin")
 	else:
-		p[0] = InstrTree("Inicio", [p[2]], "program") 
+		p[0] = InstrTree("Inicio", [p[2]], "begin") 
 
 # Lista de Declaraciones
 
@@ -32,12 +32,12 @@ def p_ident(p):
 			| IDENT TkComa TkId
 			| IDENT TkComa ASIG_ID'''
 	if (len(p) == 4):
-		p[0] = InstrTree("Identificadores", [p[1], p[3]], [p[2]])
+		p[0] = InstrTree("Identificadores", [p[1], p[3]], p[2])
 	else:
 		if(p[1] is not InstrTree):
-			p[0] = InstrTree("Identificador", None , [p[1]])
+			p[0] = InstrTree("Identificador", None , p[1])
 		else:
-			p[0] = InstrTree("Asignacion", [p[1]])
+			p[0] = InstrTree("Asignacion", [p[1]], None)
 
 
 # Tipos de variables
@@ -48,9 +48,9 @@ def p_tipo(p):
 			| TkBool
 			| TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO '''
 	if (len(p) == 2):
-		p[0] = InstrTree("Tipo", None, [p[1]])
+		p[0] = InstrTree("Tipo", None, p[1])
 	else:
-		p[0] = InstrTree("Tipo Arreglo", [p[3], p[6]], ["declaracion de array"])
+		p[0] = InstrTree("Tipo Arreglo", [p[3], p[6]], "declaracion de array")
 
 # Instrucciones
 
@@ -65,20 +65,24 @@ def p_instr(p):
 			| I_O INSTR
 			| INICIO INSTR
 			| DETER INSTR
-			| INDETER INSTR'''
-	p[0] = InstrTree("Instruccion General", [p[1]])
+			| INDETER INSTR
+			| COND INSTR'''
+	if len(p) == 2:
+		p[0] = InstrTree("Instruccion General", [p[1]])
+	else:
+		p[0] = InstrTree("Instruccion General", [p[1], p[2]])
 
 # Asignacion 
 
 def p_asig(p):
 	'''ASIG : TkId TkAsignacion EXPR TkPuntoYComa'''
-	p[0] = InstrTree("Asignacion", [p[1],p[3]], [p[2]])
+	p[0] = InstrTree("Asignacion", [InstrTree("Id", None, p[1]),p[3]], p[2])
 
 # Asignacion como identificador
 
 def p_asig_id(p):
 	'''ASIG_ID : TkId TkAsignacion EXPR'''
-	p[0] = InstrTree("Declaracion de Asignacion", [p[1], p[3]], [p[2]])
+	p[0] = InstrTree("Declaracion de Asignacion", [InstrTree("Id", None, p[1]), p[3]], p[2])
 
 # Expresiones Aritmeticas
 
@@ -90,25 +94,26 @@ def p_arit(p):
 			| ARIT TkMult ARIT
 			| ARIT TkDiv ARIT
 			| ARIT TkMod ARIT
-			| TkValorAscii TkCaracter'''
+			| TkValorAscii TkCaracter
+			| TkId'''
 	if (len(p) == 2):
 		if (p[1] == 'TkNum'):
-			p[0] = InstrTree("Numero", None, [p[1]])
+			p[0] = InstrTree("Numero", None, p[1])
 		else:
-			p[0] = InstrTree("Identificador", None, [p[1]])
+			p[0] = InstrTree("Identificador", None, p[1])
 	elif (len(p) == 4):
 		if ((p[1] == '(') and (p[3] == ')')):
-			p[0] = InstrTree("Expresion Aritmetica", [p[2]], "Parentesis")
+			p[0] = InstrTree("Expresion Aritmetica", [p[2]], "()")
 		else:
-			p[0] = InstrTree("Expresion Aritmetica", [p[1], p[3]], [p[2]])
+			p[0] = InstrTree("Expresion Aritmetica", [p[1], p[3]], p[2])
 	else:
-		p[0] = InstrTree("Expresion Aritmetica", [p[3]], [p[2]])
+		p[0] = InstrTree("Expresion Aritmetica", [p[3]], p[2])
 
 # Negacion Aritmetica
 
 def p_nega(p):
 	'''ARIT :	  TkResta ARIT %prec NEGA'''
-	p[0] = InstrTree("Negacion Aritmetica", [p[2]], [p[1]])
+	p[0] = InstrTree("Negacion Aritmetica", [p[2]], p[1])
 
 # Expresiones Booleanas
 
@@ -129,16 +134,16 @@ def p_bool(p):
 
 	if (len(p) == 4):
 		if ((p[1] == '(') and (p[3] == ')')):
-			p[0] = InstrTree("Expresion Booleana", p[2], "Parentesis")
+			p[0] = InstrTree("Expresion Booleana", [p[2]], "Parentesis")
 		else:
-			p[0] = InstrTree("Expresion Booleana", [p[1], p[3]], [p[2]])
+			p[0] = InstrTree("Expresion Booleana", [p[1], p[3]], p[2])
 	elif (len(p) == 3):
-		p[0] = InstrTree("Expresion Booleana", [p[2]], [p[1]])
+		p[0] = InstrTree("Expresion Booleana", [p[2]], p[1])
 	else:
 		if (p[1] == 'TkId'):
-			p[0] = InstrTree("Identificador", None, [p[1]])
+			p[0] = InstrTree("Identificador", None, p[1])
 		else:
-			p[0] == InstrTree("Booleano", None, [p[1]])
+			p[0] == InstrTree("Booleano", None, p[1])
 
 
 # Expresiones con caracteres
@@ -149,40 +154,35 @@ def p_char(p):
 			| TkCaracter TkAnteriorCar'''
 	if (len(p) == 2):
 		if (p[1] == 'TkId'):
-			p[0] = InstrTree("Identificador", None, [p[1]])
+			p[0] = InstrTree("Identificador", None, p[1])
 		else:
-			p[0] = InstrTree("Caracter", None, [p[1]])
+			p[0] = InstrTree("Caracter", None, p[1])
 	else:
-		p[0] = InstrTree("Expresion con Caracteres", [p[1]], [p[2]])
+		p[0] = InstrTree("Expresion con Caracteres", [p[1]], p[2])
 
 
 # Condicionales general
 
 def p_cond(p):
-	'''COND : 	  TkIf BOOL TkHacer INSTR COND0'''
-	p[0] = InstrTree("Condicional General", [p[2], p[4], p[5]], [p[3]])
-
-# Condicionales 
-
-def p_cond0(p):
-	'''COND0 :    TkOtherwise TkHacer INSTR
-				| TkEnd'''
-	if ( len(p) == 4):
-		p[0] = InstrTree("Condicional", [p[3]], [p[2]])
+	'''COND :  TkIf BOOL TkHacer INSTR TkEnd
+			|  TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd'''
+	
+	if len(p) == 6:
+		p[0] = InstrTree("Condicional", [p[2],p[4]], "Hacer If")
 	else:
-		p[0] =  InstrTree("Condicional End", None, [p[1]])
+		p[0] = InstrTree("Condicional and otherwise", [p[2],p[4],p[7]], "Condicional and otherwise")
 
 # Iteracion indeterminada
 
 def p_indeter(p):
 	'''INDETER : TkWhile BOOL TkHacer INSTR TkEnd'''
-	p[0] = InstrTree("Iteracion Indeterminada", [p[2], p[4]], [p[1]])
+	p[0] = InstrTree("Iteracion Indeterminada", [p[2], p[4]], p[1])
 
 # Iteracion determinada general
 
 def p_deter(p):
 	'''DETER :   TkFor TkId TkFrom ARIT TkTo ARIT DETER0'''
-	p[0] = InstrTree("Iteracion Determinada General", [p[4], p[6], p[7]], [p[1]])
+	p[0] = InstrTree("Iteracion Determinada General", [InstrTree("Identificador", None, p[1]), p[4], p[6], p[7]], p[1])
 
 # Iteracion determinada
 
@@ -190,16 +190,19 @@ def p_deter0(p):
 	'''DETER0 :  TkStep ARIT TkHacer INSTR TkEnd
 			| TkHacer INSTR TkEnd'''
 	if (len(p) == 6):
-		p[0] = InstrTree("Iteracion Determinada Step", [p[2], p[4]], [p[1]])
+		p[0] = InstrTree("Iteracion Determinada Step", [p[2], p[4]], p[1])
 	else:
-		p[0] = InstrTree("Iteracion Determinada", [p[2]], [p[1]])
+		p[0] = InstrTree("Iteracion Determinada", [p[2]], p[1])
 
 # Entrada y salida
 
 def p_i_o(p):
 	'''I_O :  TkRead TkId TkPuntoYComa
 			| TkPrint EXPR TkPuntoYComa'''
-	p[0] = InstrTree("Entrada o Salida", None, [p[1]])
+	if type(p[2]) is InstrTree:
+		p[0] = InstrTree("Entrada o Salida", [p[2]], p[1])
+	else:
+		p[0] = InstrTree("Entrada o Salida", [InstrTree("Identificador", None, p[2])], p[1])
 
 # Expresiones en general
 
@@ -211,7 +214,7 @@ def p_expr(p):
 			| TkId'''
 	if (len(p) == 2):
 		if (p[1] == 'TkId'):
-			InstrTree("Identificador", None, [p[1]])
+			p[0] = InstrTree("Identificador", None, p[1])
 		else:
 			p[0] = InstrTree("Expresion", [p[1]])
 	else:
@@ -222,13 +225,14 @@ def p_expr(p):
 def p_array(p):
 	'''ARRAY : ARRAY TkConcatenacion ARRAY
 			 | TkShift ARRAY
-			 | TkId TkCorcheteAbre ARIT TkCorcheteCierra'''
+			 | TkId TkCorcheteAbre ARIT TkCorcheteCierra
+			 | TkId'''
 	if (len(p) == 4):
-		p[0] = InstrTree("Arreglo", [p[1], p[3]],[p[2]])
+		p[0] = InstrTree("Arreglo", [p[1], p[3]], p[2])
 	elif ( len(p) == 3) :
-		p[0] = InstrTree("Shift", [p[1]], [p[2]])
+		p[0] = InstrTree("Shift", [p[1]], p[2])
 	else:
-		p[0] = InstrTree("Identificador", None, [p[1]])
+		p[0] = InstrTree("Identificador", None, p[1])
 
 # Detección de errores
 def p_error(p):

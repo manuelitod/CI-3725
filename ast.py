@@ -2,19 +2,19 @@ import ply.yacc as yacc
 import re
 
 class InstrTree:
-    def __init__(self ,stamp , children = None,instr = None):
+    def __init__(self, stamp, children = None, parent = None):
         self.stamp = stamp
         if children:
             self.children = children
         else:
             self.children = [ ]
-        self.instr = instr
+        self.parent = parent
     
-    def print_tree(self):
-        if self.instr != None: print(self.instr)
+    def print_tree(self, level = 0):
+        if self.parent != None: 
+            print ('\t' * level + str(self.parent))
         if self.children != None:
             for children in self.children:
-                if type(children) is not str:
-                    children.print_tree()
+                if children.parent != None: children.print_tree(level+1)
                 else:
-                    print(children, end='')
+                    children.print_tree(level)
