@@ -1,6 +1,7 @@
 begin
-	prueba <- 2*(2 + 4);
-	prueba <- $a::b[6];
-	prueba <- $a::(b[6*3]);
-	a <- 'h'++;
+	prueba <- $a[6]::b;
+	prueba2 <- $a::$b[7];
+	prueba3 <- $a[5]::b[a[6]];
+	j <- 5;
+	hola <- (hola /\ true) \/ x<4;
 end

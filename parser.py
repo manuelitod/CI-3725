@@ -116,9 +116,10 @@ def p_arit(p):
 			| ARIT TkDiv ARIT
 			| ARIT TkMod ARIT
 			| TkValorAscii TkCaracter
-			| TkId'''
+			| TkId
+			| ARRAY TkCorcheteAbre ARIT TkCorcheteCierra'''
 	if (len(p) == 2):
-		if (p[1] == 'TkNum'):
+		if (type(p[1]) is int):
 			p[0] = InstrTree("Numero", None, p[1])
 		else:
 			p[0] = InstrTree("Identificador", None, p[1])
@@ -127,6 +128,8 @@ def p_arit(p):
 			p[0] = InstrTree("Expresion Aritmetica", [p[2]], "()")
 		else:
 			p[0] = InstrTree("Expresion Aritmetica", [p[1], p[3]], p[2])
+	elif (len(p) == 5):
+		p[0] = InstrTree("Indexacion", [p[1], p[3]], "[]")
 	else:
 		p[0] = InstrTree("Expresion Aritmetica", [p[3]], p[2])
 
@@ -151,7 +154,8 @@ def p_bool(p):
 			| TkFalse
 			| TkTrue
 			| TkNegacion BOOL
-			| TkId'''
+			| TkId
+			| ARRAY TkCorcheteAbre ARIT TkCorcheteCierra'''
 
 	if (len(p) == 4):
 		if ((p[1] == '(') and (p[3] == ')')):
@@ -160,6 +164,8 @@ def p_bool(p):
 			p[0] = InstrTree("Expresion Booleana", [p[1], p[3]], p[2])
 	elif (len(p) == 3):
 		p[0] = InstrTree("Expresion Booleana", [p[2]], p[1])
+	elif (len(p) == 5):
+		p[0] = InstrTree("Indexacion", [p[1], p[3]], "[]")
 	else:
 		p[0] = InstrTree("Condicion simple", None, p[1])
 
@@ -170,9 +176,12 @@ def p_char(p):
 	'''CHAR : TkCaracter
 			| CHAR TkSiguienteCar
 			| CHAR TkAnteriorCar
-			| TkId'''
+			| TkId
+			| ARRAY TkCorcheteAbre ARIT TkCorcheteCierra'''
 	if (len(p) == 2):
 		p[0] = InstrTree("Caracter", None, p[1])
+	elif (len(p) == 5):
+		p[0] = InstrTree("Indexacion", [p[1], p[3]], "[]")
 	else:
 		p[0] = InstrTree("Expresion con Caracteres", [p[1]], p[2])
 
@@ -245,7 +254,7 @@ def p_expr(p):
 			| BOOL
 			| TkId'''
 	if (len(p) == 2):
-		if (p[1] == 'TkId'):
+		if (type(p[1]) is not InstrTree):
 			p[0] = InstrTree("Identificador", None, p[1])
 		else:
 			p[0] = InstrTree("Expresion", [p[1]])
@@ -283,11 +292,12 @@ def p_error(p):
     sys.exit()
 
 precedence = (
-	('left' 'TkMenor', 'TkMayor', 'TkMenorIgual', 'TkMayorIgual', 'TkIgual', 'TkDesigual'),
+	('left', 'TkMayor', 'TkMenor', 'TkMayorIgual', 'TkMenorIgual', 'TkIgual', 'TkDesigual'),
 	('left', 'TkSuma', 'TkResta'),
 	('left', 'TkMult', 'TkDiv', 'TkMod'),
 	('left', 'TkConjuncion', 'TkDisyuncion'),
 	('left', 'TkNegacion', 'NEGA'),
 	('left', 'TkConcatenacion'),
 	('left', 'TkShift'),
-	)
+	('left', 'TkCorcheteAbre')
+)
