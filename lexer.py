@@ -24,7 +24,7 @@ tokens = ['TkNum', 'TkId', 'TkCaracter', 'TkComa', 'TkPunto', 'TkDosPuntos', 'Tk
          'TkCorcheteAbre', 'TkCorcheteCierra', 'TkLlaveAbre', 'TkLlaveCierra', 'TkAsignacion', 'TkSuma', 
          'TkMult', 'TkResta', 'TkDiv', 'TkMod', 'TkConjuncion', 'TkDisyuncion', 'TkMenor', 'TkMenorIgual',
           'TkMayor', 'TkMayorIgual', 'TkIgual', 'TkSiguienteCar', 'TkAnteriorCar', 'TkValorAscii',
-         'TkConcatenacion', 'TkShift', 'TkPuntoYComa', 'TkHacer']
+         'TkConcatenacion', 'TkShift', 'TkPuntoYComa', 'TkHacer', 'TkDesigual']
 
 # tokens y su respectiva palabra reservaEda
 reserved = {
@@ -80,6 +80,7 @@ t_TkMenorIgual = r'\<\='
 t_TkMayor = r'\>'
 t_TkMayorIgual = r'\>\='
 t_TkIgual = r'\='
+t_TkDesigual = r'\/\='
 t_TkSiguienteCar = r'\+\+'
 t_TkAnteriorCar = r'\-\-'
 t_TkValorAscii = r'\#'

@@ -1,16 +1,3 @@
 begin
-    print 'I';
-    '\''
-    '\\'
-    var n<-'\n',begin :: int;
-    while (read n) ->
-        with
-            var an <- '\t' : int;
-            var t : bool;
-        while an <= True ->
-                
-
-            an.
-        end;
-    end;
-end;
+    x <- 2 + 2 + 2;
+end

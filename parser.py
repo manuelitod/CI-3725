@@ -43,7 +43,7 @@ def p_ident(p):
 # Tipos de variables
 
 def p_tipo(p):
-	'''TIPO :    TkInt
+	'''TIPO : TkInt
 			| TkChar
 			| TkBool
 			| TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO '''
@@ -90,8 +90,7 @@ def p_arit(p):
 			| ARIT TkMult ARIT
 			| ARIT TkDiv ARIT
 			| ARIT TkMod ARIT
-			| TkValorAscii TkCaracter
-			| TkId'''
+			| TkValorAscii TkCaracter'''
 	if (len(p) == 2):
 		if (p[1] == 'TkNum'):
 			p[0] = InstrTree("Numero", None, [p[1]])
@@ -120,12 +119,14 @@ def p_bool(p):
 			| ARIT TkMenorIgual ARIT
 			| ARIT TkMayor ARIT
 			| ARIT TkMayorIgual ARIT
-			| EXPR TkIgual EXPR
+			| ARIT TkIgual ARIT
+			| ARIT TkDesigual ARIT
 			| TkParAbre BOOL TkParCierra
 			| TkFalse
 			| TkTrue
 			| TkNegacion BOOL
 			| TkId'''
+
 	if (len(p) == 4):
 		if ((p[1] == '(') and (p[3] == ')')):
 			p[0] = InstrTree("Expresion Booleana", p[2], "Parentesis")
@@ -143,8 +144,7 @@ def p_bool(p):
 # Expresiones con caracteres
 
 def p_char(p):
-	'''CHAR : TkId 
-			| TkCaracter
+	'''CHAR : TkCaracter
 			| TkCaracter TkSiguienteCar
 			| TkCaracter TkAnteriorCar'''
 	if (len(p) == 2):
@@ -207,7 +207,7 @@ def p_expr(p):
 	'''EXPR : CHAR
 			| ARIT
 			| ARRAY
-			| TkId TkCorcheteAbre ARIT TkCorcheteCierra
+			| BOOL
 			| TkId'''
 	if (len(p) == 2):
 		if (p[1] == 'TkId'):
@@ -222,7 +222,7 @@ def p_expr(p):
 def p_array(p):
 	'''ARRAY : ARRAY TkConcatenacion ARRAY
 			 | TkShift ARRAY
-			 | TkId'''
+			 | TkId TkCorcheteAbre ARIT TkCorcheteCierra'''
 	if (len(p) == 4):
 		p[0] = InstrTree("Arreglo", [p[1], p[3]],[p[2]])
 	elif ( len(p) == 3) :
@@ -240,6 +240,8 @@ def p_error(p):
     sys.exit()
 
 precedence = (
+	('nonassoc', 'TkMenor', 'TkMayor'),
+	('nonassoc', 'TkMenorIgual', 'TkMayorIgual'),
 	('left', 'NEGA', 'TkMult', 'TkDiv', 'TkMod', 'TkSuma', 'TkResta'),
 	('left', 'TkNegacion', 'TkConjuncion', 'TkDisyuncion'),
 	('left', 'TkValorAscii', 'TkAnteriorCar', 'TkSiguienteCar'),

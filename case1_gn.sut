@@ -1,6 +1,16 @@
 with
-    var x<-2 : array[j] of bool
+var n, f1 <- 1, f2 <- 0 : int
 begin
-    x <- 2+2+4;
-    y <- 4;
+read n;
+while n > 0 ->
+with
+var tmp : int
+begin
+tmp <- f2;
+f2 <- f1;
+f1 <- f1 + tmp;
+n <- n - 1;
+end
+end
+print f2;
 end
