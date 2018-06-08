@@ -1,5 +1,7 @@
 begin
-    if a>b ->
-        print x;
+    for x from 0*5 to n-5 ->
+        for x from 0*5 to n-5 ->
+            print x;
+        end
     end
 end

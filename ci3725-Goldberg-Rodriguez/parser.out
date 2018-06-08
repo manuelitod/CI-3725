@@ -1,0 +1,4263 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    TkLlaveAbre
+    TkLlaveCierra
+
+Grammar
+
+Rule 0     S' -> INICIO
+Rule 1     INICIO -> TkWith DEC TkBegin INSTR TkEnd
+Rule 2     INICIO -> TkBegin INSTR TkEnd
+Rule 3     DEC -> DEC TkVar DEC0
+Rule 4     DEC -> TkVar IDENT TkDosPuntos TIPO
+Rule 5     DEC0 -> IDENT TkDosPuntos TIPO
+Rule 6     IDENT -> TkId
+Rule 7     IDENT -> ASIG_ID
+Rule 8     IDENT -> IDENT TkComa TkId
+Rule 9     IDENT -> IDENT TkComa ASIG_ID
+Rule 10    TIPO -> TkInt
+Rule 11    TIPO -> TkChar
+Rule 12    TIPO -> TkBool
+Rule 13    TIPO -> TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO
+Rule 14    INSTR -> ASIG
+Rule 15    INSTR -> I_O
+Rule 16    INSTR -> COND
+Rule 17    INSTR -> DETER
+Rule 18    INSTR -> INDETER
+Rule 19    INSTR -> INICIO
+Rule 20    INSTR -> PUNTO
+Rule 21    INSTR -> ASIG INSTR
+Rule 22    INSTR -> I_O INSTR
+Rule 23    INSTR -> INICIO INSTR
+Rule 24    INSTR -> DETER INSTR
+Rule 25    INSTR -> INDETER INSTR
+Rule 26    INSTR -> COND INSTR
+Rule 27    INSTR -> PUNTO INSTR
+Rule 28    PUNTO -> TkId TkPunto ARIT
+Rule 29    ASIG -> TkId TkAsignacion EXPR TkPuntoYComa
+Rule 30    ASIG_ID -> TkId TkAsignacion EXPR
+Rule 31    ARIT -> TkNum
+Rule 32    ARIT -> TkParAbre ARIT TkParCierra
+Rule 33    ARIT -> ARIT TkSuma ARIT
+Rule 34    ARIT -> ARIT TkResta ARIT
+Rule 35    ARIT -> ARIT TkMult ARIT
+Rule 36    ARIT -> ARIT TkDiv ARIT
+Rule 37    ARIT -> ARIT TkMod ARIT
+Rule 38    ARIT -> TkValorAscii TkCaracter
+Rule 39    ARIT -> TkId
+Rule 40    ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+Rule 41    ARIT -> TkResta ARIT
+Rule 42    BOOL -> BOOL TkConjuncion BOOL
+Rule 43    BOOL -> BOOL TkDisyuncion BOOL
+Rule 44    BOOL -> ARIT TkMenor ARIT
+Rule 45    BOOL -> ARIT TkMenorIgual ARIT
+Rule 46    BOOL -> ARIT TkMayor ARIT
+Rule 47    BOOL -> ARIT TkMayorIgual ARIT
+Rule 48    BOOL -> ARIT TkIgual ARIT
+Rule 49    BOOL -> ARIT TkDesigual ARIT
+Rule 50    BOOL -> TkParAbre BOOL TkParCierra
+Rule 51    BOOL -> TkFalse
+Rule 52    BOOL -> TkTrue
+Rule 53    BOOL -> TkNegacion BOOL
+Rule 54    BOOL -> TkId
+Rule 55    BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+Rule 56    CHAR -> TkCaracter
+Rule 57    CHAR -> CHAR TkSiguienteCar
+Rule 58    CHAR -> CHAR TkAnteriorCar
+Rule 59    CHAR -> TkId
+Rule 60    CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+Rule 61    COND -> TkIf BOOL TkHacer INSTR TkEnd
+Rule 62    COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+Rule 63    INDETER -> TkWhile BOOL TkHacer INSTR TkEnd
+Rule 64    DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+Rule 65    DETER0 -> TkStep ARIT TkHacer INSTR TkEnd
+Rule 66    DETER0 -> TkHacer INSTR TkEnd
+Rule 67    I_O -> TkRead TkId TkPuntoYComa
+Rule 68    I_O -> TkPrint EXPR TkPuntoYComa
+Rule 69    EXPR -> CHAR
+Rule 70    EXPR -> ARIT
+Rule 71    EXPR -> ARRAY
+Rule 72    EXPR -> BOOL
+Rule 73    EXPR -> TkId
+Rule 74    ARRAY -> ARRAY TkConcatenacion ARRAY
+Rule 75    ARRAY -> TkShift ARRAY
+Rule 76    ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+Rule 77    ARRAY -> TkId
+Rule 78    ARRAY -> TkParAbre ARRAY TkParCierra
+
+Terminals, with rules where they appear
+
+TkAnteriorCar        : 58
+TkArray              : 13
+TkAsignacion         : 29 30
+TkBegin              : 1 2
+TkBool               : 12
+TkCaracter           : 38 56
+TkChar               : 11
+TkComa               : 8 9
+TkConcatenacion      : 74
+TkConjuncion         : 42
+TkCorcheteAbre       : 13 40 55 60 76
+TkCorcheteCierra     : 13 40 55 60 76
+TkDesigual           : 49
+TkDisyuncion         : 43
+TkDiv                : 36
+TkDosPuntos          : 4 5
+TkEnd                : 1 2 61 62 63 65 66
+TkFalse              : 51
+TkFor                : 64
+TkFrom               : 64
+TkHacer              : 61 62 62 63 65 66
+TkId                 : 6 8 28 29 30 39 54 59 64 67 73 77
+TkIf                 : 61 62
+TkIgual              : 48
+TkInt                : 10
+TkLlaveAbre          : 
+TkLlaveCierra        : 
+TkMayor              : 46
+TkMayorIgual         : 47
+TkMenor              : 44
+TkMenorIgual         : 45
+TkMod                : 37
+TkMult               : 35
+TkNegacion           : 53
+TkNum                : 31
+TkOf                 : 13
+TkOtherwise          : 62
+TkParAbre            : 32 50 78
+TkParCierra          : 32 50 78
+TkPrint              : 68
+TkPunto              : 28
+TkPuntoYComa         : 29 67 68
+TkRead               : 67
+TkResta              : 34 41
+TkShift              : 75
+TkSiguienteCar       : 57
+TkStep               : 65
+TkSuma               : 33
+TkTo                 : 64
+TkTrue               : 52
+TkValorAscii         : 38
+TkVar                : 3 4
+TkWhile              : 63
+TkWith               : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+ARIT                 : 13 28 32 33 33 34 34 35 35 36 36 37 37 40 41 44 44 45 45 46 46 47 47 48 48 49 49 55 60 64 64 65 70 76
+ARRAY                : 40 55 60 71 74 74 75 76 78
+ASIG                 : 14 21
+ASIG_ID              : 7 9
+BOOL                 : 42 42 43 43 50 53 61 62 63 72
+CHAR                 : 57 58 69
+COND                 : 16 26
+DEC                  : 1 3
+DEC0                 : 3
+DETER                : 17 24
+DETER0               : 64
+EXPR                 : 29 30 68
+IDENT                : 4 5 8 9
+INDETER              : 18 25
+INICIO               : 19 23 0
+INSTR                : 1 2 21 22 23 24 25 26 27 61 62 62 63 65 66
+I_O                  : 15 22
+PUNTO                : 20 27
+TIPO                 : 4 5 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . INICIO
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    INICIO                         shift and go to state 2
+
+state 1
+
+    (1) INICIO -> TkWith . DEC TkBegin INSTR TkEnd
+    (3) DEC -> . DEC TkVar DEC0
+    (4) DEC -> . TkVar IDENT TkDosPuntos TIPO
+
+    TkVar           shift and go to state 5
+
+    DEC                            shift and go to state 4
+
+state 2
+
+    (0) S' -> INICIO .
+
+
+
+state 3
+
+    (2) INICIO -> TkBegin . INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 7
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 4
+
+    (1) INICIO -> TkWith DEC . TkBegin INSTR TkEnd
+    (3) DEC -> DEC . TkVar DEC0
+
+    TkBegin         shift and go to state 21
+    TkVar           shift and go to state 20
+
+
+state 5
+
+    (4) DEC -> TkVar . IDENT TkDosPuntos TIPO
+    (6) IDENT -> . TkId
+    (7) IDENT -> . ASIG_ID
+    (8) IDENT -> . IDENT TkComa TkId
+    (9) IDENT -> . IDENT TkComa ASIG_ID
+    (30) ASIG_ID -> . TkId TkAsignacion EXPR
+
+    TkId            shift and go to state 24
+
+    ASIG_ID                        shift and go to state 22
+    IDENT                          shift and go to state 23
+
+state 6
+
+    (15) INSTR -> I_O .
+    (22) INSTR -> I_O . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 15 (INSTR -> I_O .)
+    TkOtherwise     reduce using rule 15 (INSTR -> I_O .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 25
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 7
+
+    (2) INICIO -> TkBegin INSTR . TkEnd
+
+    TkEnd           shift and go to state 26
+
+
+state 8
+
+    (63) INDETER -> TkWhile . BOOL TkHacer INSTR TkEnd
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkParAbre       shift and go to state 33
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+    TkId            shift and go to state 37
+    TkNum           shift and go to state 28
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    BOOL                           shift and go to state 36
+    ARRAY                          shift and go to state 38
+    ARIT                           shift and go to state 35
+
+state 9
+
+    (20) INSTR -> PUNTO .
+    (27) INSTR -> PUNTO . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 20 (INSTR -> PUNTO .)
+    TkOtherwise     reduce using rule 20 (INSTR -> PUNTO .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 39
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 10
+
+    (64) DETER -> TkFor . TkId TkFrom ARIT TkTo ARIT DETER0
+
+    TkId            shift and go to state 40
+
+
+state 11
+
+    (67) I_O -> TkRead . TkId TkPuntoYComa
+
+    TkId            shift and go to state 41
+
+
+state 12
+
+    (19) INSTR -> INICIO .
+    (23) INSTR -> INICIO . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 19 (INSTR -> INICIO .)
+    TkOtherwise     reduce using rule 19 (INSTR -> INICIO .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 42
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 13
+
+    (68) I_O -> TkPrint . EXPR TkPuntoYComa
+    (69) EXPR -> . CHAR
+    (70) EXPR -> . ARIT
+    (71) EXPR -> . ARRAY
+    (72) EXPR -> . BOOL
+    (73) EXPR -> . TkId
+    (56) CHAR -> . TkCaracter
+    (57) CHAR -> . CHAR TkSiguienteCar
+    (58) CHAR -> . CHAR TkAnteriorCar
+    (59) CHAR -> . TkId
+    (60) CHAR -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkId            shift and go to state 48
+    TkCaracter      shift and go to state 43
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 45
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+
+    BOOL                           shift and go to state 47
+    CHAR                           shift and go to state 49
+    EXPR                           shift and go to state 50
+    ARIT                           shift and go to state 46
+    ARRAY                          shift and go to state 44
+
+state 14
+
+    (16) INSTR -> COND .
+    (26) INSTR -> COND . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 16 (INSTR -> COND .)
+    TkOtherwise     reduce using rule 16 (INSTR -> COND .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 51
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 15
+
+    (29) ASIG -> TkId . TkAsignacion EXPR TkPuntoYComa
+    (28) PUNTO -> TkId . TkPunto ARIT
+
+    TkAsignacion    shift and go to state 52
+    TkPunto         shift and go to state 53
+
+
+state 16
+
+    (61) COND -> TkIf . BOOL TkHacer INSTR TkEnd
+    (62) COND -> TkIf . BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkParAbre       shift and go to state 33
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+    TkId            shift and go to state 37
+    TkNum           shift and go to state 28
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    BOOL                           shift and go to state 54
+    ARRAY                          shift and go to state 38
+    ARIT                           shift and go to state 35
+
+state 17
+
+    (17) INSTR -> DETER .
+    (24) INSTR -> DETER . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 17 (INSTR -> DETER .)
+    TkOtherwise     reduce using rule 17 (INSTR -> DETER .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 55
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 18
+
+    (14) INSTR -> ASIG .
+    (21) INSTR -> ASIG . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 14 (INSTR -> ASIG .)
+    TkOtherwise     reduce using rule 14 (INSTR -> ASIG .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 56
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 19
+
+    (18) INSTR -> INDETER .
+    (25) INSTR -> INDETER . INSTR
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkEnd           reduce using rule 18 (INSTR -> INDETER .)
+    TkOtherwise     reduce using rule 18 (INSTR -> INDETER .)
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 57
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 20
+
+    (3) DEC -> DEC TkVar . DEC0
+    (5) DEC0 -> . IDENT TkDosPuntos TIPO
+    (6) IDENT -> . TkId
+    (7) IDENT -> . ASIG_ID
+    (8) IDENT -> . IDENT TkComa TkId
+    (9) IDENT -> . IDENT TkComa ASIG_ID
+    (30) ASIG_ID -> . TkId TkAsignacion EXPR
+
+    TkId            shift and go to state 24
+
+    DEC0                           shift and go to state 58
+    ASIG_ID                        shift and go to state 22
+    IDENT                          shift and go to state 59
+
+state 21
+
+    (1) INICIO -> TkWith DEC TkBegin . INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    INSTR                          shift and go to state 60
+    I_O                            shift and go to state 6
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 22
+
+    (7) IDENT -> ASIG_ID .
+
+    TkDosPuntos     reduce using rule 7 (IDENT -> ASIG_ID .)
+    TkComa          reduce using rule 7 (IDENT -> ASIG_ID .)
+
+
+state 23
+
+    (4) DEC -> TkVar IDENT . TkDosPuntos TIPO
+    (8) IDENT -> IDENT . TkComa TkId
+    (9) IDENT -> IDENT . TkComa ASIG_ID
+
+    TkDosPuntos     shift and go to state 61
+    TkComa          shift and go to state 62
+
+
+state 24
+
+    (6) IDENT -> TkId .
+    (30) ASIG_ID -> TkId . TkAsignacion EXPR
+
+    TkDosPuntos     reduce using rule 6 (IDENT -> TkId .)
+    TkComa          reduce using rule 6 (IDENT -> TkId .)
+    TkAsignacion    shift and go to state 63
+
+
+state 25
+
+    (22) INSTR -> I_O INSTR .
+
+    TkEnd           reduce using rule 22 (INSTR -> I_O INSTR .)
+    TkOtherwise     reduce using rule 22 (INSTR -> I_O INSTR .)
+
+
+state 26
+
+    (2) INICIO -> TkBegin INSTR TkEnd .
+
+    TkId            reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkRead          reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkPrint         reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkIf            reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkFor           reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkWhile         reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkWith          reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkBegin         reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkEnd           reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    TkOtherwise     reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+    $end            reduce using rule 2 (INICIO -> TkBegin INSTR TkEnd .)
+
+
+state 27
+
+    (51) BOOL -> TkFalse .
+
+    TkConjuncion    reduce using rule 51 (BOOL -> TkFalse .)
+    TkDisyuncion    reduce using rule 51 (BOOL -> TkFalse .)
+    TkPuntoYComa    reduce using rule 51 (BOOL -> TkFalse .)
+    TkHacer         reduce using rule 51 (BOOL -> TkFalse .)
+    TkParCierra     reduce using rule 51 (BOOL -> TkFalse .)
+    TkDosPuntos     reduce using rule 51 (BOOL -> TkFalse .)
+    TkComa          reduce using rule 51 (BOOL -> TkFalse .)
+
+
+state 28
+
+    (31) ARIT -> TkNum .
+
+    TkCorcheteCierra reduce using rule 31 (ARIT -> TkNum .)
+    TkSuma          reduce using rule 31 (ARIT -> TkNum .)
+    TkResta         reduce using rule 31 (ARIT -> TkNum .)
+    TkMult          reduce using rule 31 (ARIT -> TkNum .)
+    TkDiv           reduce using rule 31 (ARIT -> TkNum .)
+    TkMod           reduce using rule 31 (ARIT -> TkNum .)
+    TkMenor         reduce using rule 31 (ARIT -> TkNum .)
+    TkMenorIgual    reduce using rule 31 (ARIT -> TkNum .)
+    TkMayor         reduce using rule 31 (ARIT -> TkNum .)
+    TkMayorIgual    reduce using rule 31 (ARIT -> TkNum .)
+    TkIgual         reduce using rule 31 (ARIT -> TkNum .)
+    TkDesigual      reduce using rule 31 (ARIT -> TkNum .)
+    TkPuntoYComa    reduce using rule 31 (ARIT -> TkNum .)
+    TkParCierra     reduce using rule 31 (ARIT -> TkNum .)
+    TkId            reduce using rule 31 (ARIT -> TkNum .)
+    TkRead          reduce using rule 31 (ARIT -> TkNum .)
+    TkPrint         reduce using rule 31 (ARIT -> TkNum .)
+    TkIf            reduce using rule 31 (ARIT -> TkNum .)
+    TkFor           reduce using rule 31 (ARIT -> TkNum .)
+    TkWhile         reduce using rule 31 (ARIT -> TkNum .)
+    TkWith          reduce using rule 31 (ARIT -> TkNum .)
+    TkBegin         reduce using rule 31 (ARIT -> TkNum .)
+    TkEnd           reduce using rule 31 (ARIT -> TkNum .)
+    TkOtherwise     reduce using rule 31 (ARIT -> TkNum .)
+    TkDosPuntos     reduce using rule 31 (ARIT -> TkNum .)
+    TkComa          reduce using rule 31 (ARIT -> TkNum .)
+    TkHacer         reduce using rule 31 (ARIT -> TkNum .)
+    TkConjuncion    reduce using rule 31 (ARIT -> TkNum .)
+    TkDisyuncion    reduce using rule 31 (ARIT -> TkNum .)
+    TkTo            reduce using rule 31 (ARIT -> TkNum .)
+    TkStep          reduce using rule 31 (ARIT -> TkNum .)
+
+
+state 29
+
+    (52) BOOL -> TkTrue .
+
+    TkConjuncion    reduce using rule 52 (BOOL -> TkTrue .)
+    TkDisyuncion    reduce using rule 52 (BOOL -> TkTrue .)
+    TkPuntoYComa    reduce using rule 52 (BOOL -> TkTrue .)
+    TkHacer         reduce using rule 52 (BOOL -> TkTrue .)
+    TkParCierra     reduce using rule 52 (BOOL -> TkTrue .)
+    TkDosPuntos     reduce using rule 52 (BOOL -> TkTrue .)
+    TkComa          reduce using rule 52 (BOOL -> TkTrue .)
+
+
+state 30
+
+    (38) ARIT -> TkValorAscii . TkCaracter
+
+    TkCaracter      shift and go to state 64
+
+
+state 31
+
+    (53) BOOL -> TkNegacion . BOOL
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkParAbre       shift and go to state 33
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+    TkId            shift and go to state 37
+    TkNum           shift and go to state 28
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    BOOL                           shift and go to state 65
+    ARRAY                          shift and go to state 38
+    ARIT                           shift and go to state 35
+
+state 32
+
+    (41) ARIT -> TkResta . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 67
+
+state 33
+
+    (50) BOOL -> TkParAbre . BOOL TkParCierra
+    (32) ARIT -> TkParAbre . ARIT TkParCierra
+    (78) ARRAY -> TkParAbre . ARRAY TkParCierra
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkParAbre       shift and go to state 33
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+    TkId            shift and go to state 37
+    TkNum           shift and go to state 28
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    BOOL                           shift and go to state 72
+    ARRAY                          shift and go to state 70
+    ARIT                           shift and go to state 71
+
+state 34
+
+    (75) ARRAY -> TkShift . ARRAY
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkShift         shift and go to state 34
+    TkId            shift and go to state 75
+    TkParAbre       shift and go to state 73
+
+    ARRAY                          shift and go to state 74
+
+state 35
+
+    (44) BOOL -> ARIT . TkMenor ARIT
+    (45) BOOL -> ARIT . TkMenorIgual ARIT
+    (46) BOOL -> ARIT . TkMayor ARIT
+    (47) BOOL -> ARIT . TkMayorIgual ARIT
+    (48) BOOL -> ARIT . TkIgual ARIT
+    (49) BOOL -> ARIT . TkDesigual ARIT
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkMenor         shift and go to state 83
+    TkMenorIgual    shift and go to state 80
+    TkMayor         shift and go to state 84
+    TkMayorIgual    shift and go to state 76
+    TkIgual         shift and go to state 77
+    TkDesigual      shift and go to state 81
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 36
+
+    (63) INDETER -> TkWhile BOOL . TkHacer INSTR TkEnd
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkHacer         shift and go to state 88
+    TkConjuncion    shift and go to state 87
+    TkDisyuncion    shift and go to state 89
+
+
+state 37
+
+    (54) BOOL -> TkId .
+    (39) ARIT -> TkId .
+    (77) ARRAY -> TkId .
+
+  ! reduce/reduce conflict for TkParCierra resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkParCierra resolved using rule 39 (ARIT -> TkId .)
+    TkConjuncion    reduce using rule 54 (BOOL -> TkId .)
+    TkDisyuncion    reduce using rule 54 (BOOL -> TkId .)
+    TkHacer         reduce using rule 54 (BOOL -> TkId .)
+    TkPuntoYComa    reduce using rule 54 (BOOL -> TkId .)
+    TkDosPuntos     reduce using rule 54 (BOOL -> TkId .)
+    TkComa          reduce using rule 54 (BOOL -> TkId .)
+    TkMenor         reduce using rule 39 (ARIT -> TkId .)
+    TkMenorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkMayor         reduce using rule 39 (ARIT -> TkId .)
+    TkMayorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkIgual         reduce using rule 39 (ARIT -> TkId .)
+    TkDesigual      reduce using rule 39 (ARIT -> TkId .)
+    TkSuma          reduce using rule 39 (ARIT -> TkId .)
+    TkResta         reduce using rule 39 (ARIT -> TkId .)
+    TkMult          reduce using rule 39 (ARIT -> TkId .)
+    TkDiv           reduce using rule 39 (ARIT -> TkId .)
+    TkMod           reduce using rule 39 (ARIT -> TkId .)
+    TkParCierra     reduce using rule 39 (ARIT -> TkId .)
+    TkCorcheteAbre  reduce using rule 77 (ARRAY -> TkId .)
+    TkConcatenacion reduce using rule 77 (ARRAY -> TkId .)
+
+  ! TkParCierra     [ reduce using rule 54 (BOOL -> TkId .) ]
+  ! TkParCierra     [ reduce using rule 77 (ARRAY -> TkId .) ]
+
+
+state 38
+
+    (55) BOOL -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (40) ARIT -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkCorcheteAbre  shift and go to state 90
+    TkConcatenacion shift and go to state 91
+
+
+state 39
+
+    (27) INSTR -> PUNTO INSTR .
+
+    TkEnd           reduce using rule 27 (INSTR -> PUNTO INSTR .)
+    TkOtherwise     reduce using rule 27 (INSTR -> PUNTO INSTR .)
+
+
+state 40
+
+    (64) DETER -> TkFor TkId . TkFrom ARIT TkTo ARIT DETER0
+
+    TkFrom          shift and go to state 92
+
+
+state 41
+
+    (67) I_O -> TkRead TkId . TkPuntoYComa
+
+    TkPuntoYComa    shift and go to state 93
+
+
+state 42
+
+    (23) INSTR -> INICIO INSTR .
+
+    TkEnd           reduce using rule 23 (INSTR -> INICIO INSTR .)
+    TkOtherwise     reduce using rule 23 (INSTR -> INICIO INSTR .)
+
+
+state 43
+
+    (56) CHAR -> TkCaracter .
+
+    TkSiguienteCar  reduce using rule 56 (CHAR -> TkCaracter .)
+    TkAnteriorCar   reduce using rule 56 (CHAR -> TkCaracter .)
+    TkDosPuntos     reduce using rule 56 (CHAR -> TkCaracter .)
+    TkComa          reduce using rule 56 (CHAR -> TkCaracter .)
+    TkPuntoYComa    reduce using rule 56 (CHAR -> TkCaracter .)
+
+
+state 44
+
+    (71) EXPR -> ARRAY .
+    (60) CHAR -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (40) ARIT -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (55) BOOL -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkDosPuntos     reduce using rule 71 (EXPR -> ARRAY .)
+    TkComa          reduce using rule 71 (EXPR -> ARRAY .)
+    TkPuntoYComa    reduce using rule 71 (EXPR -> ARRAY .)
+    TkCorcheteAbre  shift and go to state 94
+    TkConcatenacion shift and go to state 91
+
+
+state 45
+
+    (32) ARIT -> TkParAbre . ARIT TkParCierra
+    (78) ARRAY -> TkParAbre . ARRAY TkParCierra
+    (50) BOOL -> TkParAbre . BOOL TkParCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 45
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 97
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+
+    BOOL                           shift and go to state 72
+    ARRAY                          shift and go to state 95
+    ARIT                           shift and go to state 96
+
+state 46
+
+    (70) EXPR -> ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+    (44) BOOL -> ARIT . TkMenor ARIT
+    (45) BOOL -> ARIT . TkMenorIgual ARIT
+    (46) BOOL -> ARIT . TkMayor ARIT
+    (47) BOOL -> ARIT . TkMayorIgual ARIT
+    (48) BOOL -> ARIT . TkIgual ARIT
+    (49) BOOL -> ARIT . TkDesigual ARIT
+
+    TkDosPuntos     reduce using rule 70 (EXPR -> ARIT .)
+    TkComa          reduce using rule 70 (EXPR -> ARIT .)
+    TkPuntoYComa    reduce using rule 70 (EXPR -> ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+    TkMenor         shift and go to state 83
+    TkMenorIgual    shift and go to state 80
+    TkMayor         shift and go to state 84
+    TkMayorIgual    shift and go to state 76
+    TkIgual         shift and go to state 77
+    TkDesigual      shift and go to state 81
+
+
+state 47
+
+    (72) EXPR -> BOOL .
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkDosPuntos     reduce using rule 72 (EXPR -> BOOL .)
+    TkComa          reduce using rule 72 (EXPR -> BOOL .)
+    TkPuntoYComa    reduce using rule 72 (EXPR -> BOOL .)
+    TkConjuncion    shift and go to state 87
+    TkDisyuncion    shift and go to state 89
+
+
+state 48
+
+    (73) EXPR -> TkId .
+    (59) CHAR -> TkId .
+    (39) ARIT -> TkId .
+    (77) ARRAY -> TkId .
+    (54) BOOL -> TkId .
+
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 59 (CHAR -> TkId .)
+  ! reduce/reduce conflict for TkComa resolved using rule 59 (CHAR -> TkId .)
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 59 (CHAR -> TkId .)
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkComa resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkComa resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkComa resolved using rule 39 (ARIT -> TkId .)
+    TkSiguienteCar  reduce using rule 59 (CHAR -> TkId .)
+    TkAnteriorCar   reduce using rule 59 (CHAR -> TkId .)
+    TkSuma          reduce using rule 39 (ARIT -> TkId .)
+    TkResta         reduce using rule 39 (ARIT -> TkId .)
+    TkMult          reduce using rule 39 (ARIT -> TkId .)
+    TkDiv           reduce using rule 39 (ARIT -> TkId .)
+    TkMod           reduce using rule 39 (ARIT -> TkId .)
+    TkMenor         reduce using rule 39 (ARIT -> TkId .)
+    TkMenorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkMayor         reduce using rule 39 (ARIT -> TkId .)
+    TkMayorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkIgual         reduce using rule 39 (ARIT -> TkId .)
+    TkDesigual      reduce using rule 39 (ARIT -> TkId .)
+    TkPuntoYComa    reduce using rule 39 (ARIT -> TkId .)
+    TkDosPuntos     reduce using rule 39 (ARIT -> TkId .)
+    TkComa          reduce using rule 39 (ARIT -> TkId .)
+    TkCorcheteAbre  reduce using rule 77 (ARRAY -> TkId .)
+    TkConcatenacion reduce using rule 77 (ARRAY -> TkId .)
+    TkConjuncion    reduce using rule 54 (BOOL -> TkId .)
+    TkDisyuncion    reduce using rule 54 (BOOL -> TkId .)
+
+  ! TkDosPuntos     [ reduce using rule 73 (EXPR -> TkId .) ]
+  ! TkComa          [ reduce using rule 73 (EXPR -> TkId .) ]
+  ! TkPuntoYComa    [ reduce using rule 73 (EXPR -> TkId .) ]
+  ! TkDosPuntos     [ reduce using rule 59 (CHAR -> TkId .) ]
+  ! TkComa          [ reduce using rule 59 (CHAR -> TkId .) ]
+  ! TkPuntoYComa    [ reduce using rule 59 (CHAR -> TkId .) ]
+  ! TkPuntoYComa    [ reduce using rule 77 (ARRAY -> TkId .) ]
+  ! TkDosPuntos     [ reduce using rule 77 (ARRAY -> TkId .) ]
+  ! TkComa          [ reduce using rule 77 (ARRAY -> TkId .) ]
+  ! TkPuntoYComa    [ reduce using rule 54 (BOOL -> TkId .) ]
+  ! TkDosPuntos     [ reduce using rule 54 (BOOL -> TkId .) ]
+  ! TkComa          [ reduce using rule 54 (BOOL -> TkId .) ]
+
+
+state 49
+
+    (69) EXPR -> CHAR .
+    (57) CHAR -> CHAR . TkSiguienteCar
+    (58) CHAR -> CHAR . TkAnteriorCar
+
+    TkDosPuntos     reduce using rule 69 (EXPR -> CHAR .)
+    TkComa          reduce using rule 69 (EXPR -> CHAR .)
+    TkPuntoYComa    reduce using rule 69 (EXPR -> CHAR .)
+    TkSiguienteCar  shift and go to state 99
+    TkAnteriorCar   shift and go to state 98
+
+
+state 50
+
+    (68) I_O -> TkPrint EXPR . TkPuntoYComa
+
+    TkPuntoYComa    shift and go to state 100
+
+
+state 51
+
+    (26) INSTR -> COND INSTR .
+
+    TkEnd           reduce using rule 26 (INSTR -> COND INSTR .)
+    TkOtherwise     reduce using rule 26 (INSTR -> COND INSTR .)
+
+
+state 52
+
+    (29) ASIG -> TkId TkAsignacion . EXPR TkPuntoYComa
+    (69) EXPR -> . CHAR
+    (70) EXPR -> . ARIT
+    (71) EXPR -> . ARRAY
+    (72) EXPR -> . BOOL
+    (73) EXPR -> . TkId
+    (56) CHAR -> . TkCaracter
+    (57) CHAR -> . CHAR TkSiguienteCar
+    (58) CHAR -> . CHAR TkAnteriorCar
+    (59) CHAR -> . TkId
+    (60) CHAR -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkId            shift and go to state 48
+    TkCaracter      shift and go to state 43
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 45
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+
+    BOOL                           shift and go to state 47
+    CHAR                           shift and go to state 49
+    EXPR                           shift and go to state 101
+    ARIT                           shift and go to state 46
+    ARRAY                          shift and go to state 44
+
+state 53
+
+    (28) PUNTO -> TkId TkPunto . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 102
+
+state 54
+
+    (61) COND -> TkIf BOOL . TkHacer INSTR TkEnd
+    (62) COND -> TkIf BOOL . TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkHacer         shift and go to state 103
+    TkConjuncion    shift and go to state 87
+    TkDisyuncion    shift and go to state 89
+
+
+state 55
+
+    (24) INSTR -> DETER INSTR .
+
+    TkEnd           reduce using rule 24 (INSTR -> DETER INSTR .)
+    TkOtherwise     reduce using rule 24 (INSTR -> DETER INSTR .)
+
+
+state 56
+
+    (21) INSTR -> ASIG INSTR .
+
+    TkEnd           reduce using rule 21 (INSTR -> ASIG INSTR .)
+    TkOtherwise     reduce using rule 21 (INSTR -> ASIG INSTR .)
+
+
+state 57
+
+    (25) INSTR -> INDETER INSTR .
+
+    TkEnd           reduce using rule 25 (INSTR -> INDETER INSTR .)
+    TkOtherwise     reduce using rule 25 (INSTR -> INDETER INSTR .)
+
+
+state 58
+
+    (3) DEC -> DEC TkVar DEC0 .
+
+    TkBegin         reduce using rule 3 (DEC -> DEC TkVar DEC0 .)
+    TkVar           reduce using rule 3 (DEC -> DEC TkVar DEC0 .)
+
+
+state 59
+
+    (5) DEC0 -> IDENT . TkDosPuntos TIPO
+    (8) IDENT -> IDENT . TkComa TkId
+    (9) IDENT -> IDENT . TkComa ASIG_ID
+
+    TkDosPuntos     shift and go to state 104
+    TkComa          shift and go to state 62
+
+
+state 60
+
+    (1) INICIO -> TkWith DEC TkBegin INSTR . TkEnd
+
+    TkEnd           shift and go to state 105
+
+
+state 61
+
+    (4) DEC -> TkVar IDENT TkDosPuntos . TIPO
+    (10) TIPO -> . TkInt
+    (11) TIPO -> . TkChar
+    (12) TIPO -> . TkBool
+    (13) TIPO -> . TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO
+
+    TkInt           shift and go to state 106
+    TkChar          shift and go to state 110
+    TkBool          shift and go to state 108
+    TkArray         shift and go to state 109
+
+    TIPO                           shift and go to state 107
+
+state 62
+
+    (8) IDENT -> IDENT TkComa . TkId
+    (9) IDENT -> IDENT TkComa . ASIG_ID
+    (30) ASIG_ID -> . TkId TkAsignacion EXPR
+
+    TkId            shift and go to state 112
+
+    ASIG_ID                        shift and go to state 111
+
+state 63
+
+    (30) ASIG_ID -> TkId TkAsignacion . EXPR
+    (69) EXPR -> . CHAR
+    (70) EXPR -> . ARIT
+    (71) EXPR -> . ARRAY
+    (72) EXPR -> . BOOL
+    (73) EXPR -> . TkId
+    (56) CHAR -> . TkCaracter
+    (57) CHAR -> . CHAR TkSiguienteCar
+    (58) CHAR -> . CHAR TkAnteriorCar
+    (59) CHAR -> . TkId
+    (60) CHAR -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkId            shift and go to state 48
+    TkCaracter      shift and go to state 43
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 45
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+
+    BOOL                           shift and go to state 47
+    CHAR                           shift and go to state 49
+    EXPR                           shift and go to state 113
+    ARIT                           shift and go to state 46
+    ARRAY                          shift and go to state 44
+
+state 64
+
+    (38) ARIT -> TkValorAscii TkCaracter .
+
+    TkCorcheteCierra reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkSuma          reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkResta         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkMult          reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkDiv           reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkMod           reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkMenor         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkMenorIgual    reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkMayor         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkMayorIgual    reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkIgual         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkDesigual      reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkPuntoYComa    reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkParCierra     reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkId            reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkRead          reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkPrint         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkIf            reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkFor           reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkWhile         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkWith          reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkBegin         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkEnd           reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkOtherwise     reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkDosPuntos     reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkComa          reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkHacer         reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkConjuncion    reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkDisyuncion    reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkTo            reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+    TkStep          reduce using rule 38 (ARIT -> TkValorAscii TkCaracter .)
+
+
+state 65
+
+    (53) BOOL -> TkNegacion BOOL .
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkConjuncion    reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+    TkDisyuncion    reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+    TkPuntoYComa    reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+    TkHacer         reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+    TkParCierra     reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+    TkDosPuntos     reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+    TkComa          reduce using rule 53 (BOOL -> TkNegacion BOOL .)
+
+  ! TkConjuncion    [ shift and go to state 87 ]
+  ! TkDisyuncion    [ shift and go to state 89 ]
+
+
+state 66
+
+    (32) ARIT -> TkParAbre . ARIT TkParCierra
+    (78) ARRAY -> TkParAbre . ARRAY TkParCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 115
+    ARIT                           shift and go to state 114
+
+state 67
+
+    (41) ARIT -> TkResta ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkSuma          reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkResta         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkMult          reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkDiv           reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkMod           reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkMenor         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkMenorIgual    reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkMayor         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkMayorIgual    reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkIgual         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkDesigual      reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkPuntoYComa    reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkParCierra     reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkId            reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkRead          reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkPrint         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkIf            reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkFor           reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkWhile         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkWith          reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkBegin         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkEnd           reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkOtherwise     reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkDosPuntos     reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkComa          reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkHacer         reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkConjuncion    reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkDisyuncion    reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkTo            reduce using rule 41 (ARIT -> TkResta ARIT .)
+    TkStep          reduce using rule 41 (ARIT -> TkResta ARIT .)
+
+  ! TkSuma          [ shift and go to state 85 ]
+  ! TkResta         [ shift and go to state 78 ]
+  ! TkMult          [ shift and go to state 86 ]
+  ! TkDiv           [ shift and go to state 82 ]
+  ! TkMod           [ shift and go to state 79 ]
+
+
+state 68
+
+    (39) ARIT -> TkId .
+    (77) ARRAY -> TkId .
+
+  ! reduce/reduce conflict for TkParCierra resolved using rule 39 (ARIT -> TkId .)
+    TkCorcheteCierra reduce using rule 39 (ARIT -> TkId .)
+    TkSuma          reduce using rule 39 (ARIT -> TkId .)
+    TkResta         reduce using rule 39 (ARIT -> TkId .)
+    TkMult          reduce using rule 39 (ARIT -> TkId .)
+    TkDiv           reduce using rule 39 (ARIT -> TkId .)
+    TkMod           reduce using rule 39 (ARIT -> TkId .)
+    TkMenor         reduce using rule 39 (ARIT -> TkId .)
+    TkMenorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkMayor         reduce using rule 39 (ARIT -> TkId .)
+    TkMayorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkIgual         reduce using rule 39 (ARIT -> TkId .)
+    TkDesigual      reduce using rule 39 (ARIT -> TkId .)
+    TkPuntoYComa    reduce using rule 39 (ARIT -> TkId .)
+    TkParCierra     reduce using rule 39 (ARIT -> TkId .)
+    TkId            reduce using rule 39 (ARIT -> TkId .)
+    TkRead          reduce using rule 39 (ARIT -> TkId .)
+    TkPrint         reduce using rule 39 (ARIT -> TkId .)
+    TkIf            reduce using rule 39 (ARIT -> TkId .)
+    TkFor           reduce using rule 39 (ARIT -> TkId .)
+    TkWhile         reduce using rule 39 (ARIT -> TkId .)
+    TkWith          reduce using rule 39 (ARIT -> TkId .)
+    TkBegin         reduce using rule 39 (ARIT -> TkId .)
+    TkEnd           reduce using rule 39 (ARIT -> TkId .)
+    TkOtherwise     reduce using rule 39 (ARIT -> TkId .)
+    TkDosPuntos     reduce using rule 39 (ARIT -> TkId .)
+    TkComa          reduce using rule 39 (ARIT -> TkId .)
+    TkHacer         reduce using rule 39 (ARIT -> TkId .)
+    TkConjuncion    reduce using rule 39 (ARIT -> TkId .)
+    TkDisyuncion    reduce using rule 39 (ARIT -> TkId .)
+    TkTo            reduce using rule 39 (ARIT -> TkId .)
+    TkStep          reduce using rule 39 (ARIT -> TkId .)
+    TkCorcheteAbre  reduce using rule 77 (ARRAY -> TkId .)
+    TkConcatenacion reduce using rule 77 (ARRAY -> TkId .)
+
+  ! TkParCierra     [ reduce using rule 77 (ARRAY -> TkId .) ]
+
+
+state 69
+
+    (40) ARIT -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkCorcheteAbre  shift and go to state 116
+    TkConcatenacion shift and go to state 91
+
+
+state 70
+
+    (78) ARRAY -> TkParAbre ARRAY . TkParCierra
+    (55) BOOL -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (40) ARIT -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkParCierra     shift and go to state 117
+    TkCorcheteAbre  shift and go to state 90
+    TkConcatenacion shift and go to state 91
+
+
+state 71
+
+    (32) ARIT -> TkParAbre ARIT . TkParCierra
+    (44) BOOL -> ARIT . TkMenor ARIT
+    (45) BOOL -> ARIT . TkMenorIgual ARIT
+    (46) BOOL -> ARIT . TkMayor ARIT
+    (47) BOOL -> ARIT . TkMayorIgual ARIT
+    (48) BOOL -> ARIT . TkIgual ARIT
+    (49) BOOL -> ARIT . TkDesigual ARIT
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkParCierra     shift and go to state 118
+    TkMenor         shift and go to state 83
+    TkMenorIgual    shift and go to state 80
+    TkMayor         shift and go to state 84
+    TkMayorIgual    shift and go to state 76
+    TkIgual         shift and go to state 77
+    TkDesigual      shift and go to state 81
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 72
+
+    (50) BOOL -> TkParAbre BOOL . TkParCierra
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkParCierra     shift and go to state 119
+    TkConjuncion    shift and go to state 87
+    TkDisyuncion    shift and go to state 89
+
+
+state 73
+
+    (78) ARRAY -> TkParAbre . ARRAY TkParCierra
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkShift         shift and go to state 34
+    TkId            shift and go to state 75
+    TkParAbre       shift and go to state 73
+
+    ARRAY                          shift and go to state 120
+
+state 74
+
+    (75) ARRAY -> TkShift ARRAY .
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkConcatenacion reduce using rule 75 (ARRAY -> TkShift ARRAY .)
+    TkPuntoYComa    reduce using rule 75 (ARRAY -> TkShift ARRAY .)
+    TkDosPuntos     reduce using rule 75 (ARRAY -> TkShift ARRAY .)
+    TkComa          reduce using rule 75 (ARRAY -> TkShift ARRAY .)
+    TkParCierra     reduce using rule 75 (ARRAY -> TkShift ARRAY .)
+    TkCorcheteAbre  shift and go to state 121
+
+  ! TkCorcheteAbre  [ reduce using rule 75 (ARRAY -> TkShift ARRAY .) ]
+  ! TkConcatenacion [ shift and go to state 91 ]
+
+
+state 75
+
+    (77) ARRAY -> TkId .
+
+    TkConcatenacion reduce using rule 77 (ARRAY -> TkId .)
+    TkCorcheteAbre  reduce using rule 77 (ARRAY -> TkId .)
+    TkPuntoYComa    reduce using rule 77 (ARRAY -> TkId .)
+    TkParCierra     reduce using rule 77 (ARRAY -> TkId .)
+    TkDosPuntos     reduce using rule 77 (ARRAY -> TkId .)
+    TkComa          reduce using rule 77 (ARRAY -> TkId .)
+
+
+state 76
+
+    (47) BOOL -> ARIT TkMayorIgual . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 122
+
+state 77
+
+    (48) BOOL -> ARIT TkIgual . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 123
+
+state 78
+
+    (34) ARIT -> ARIT TkResta . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 124
+
+state 79
+
+    (37) ARIT -> ARIT TkMod . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 125
+
+state 80
+
+    (45) BOOL -> ARIT TkMenorIgual . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 126
+
+state 81
+
+    (49) BOOL -> ARIT TkDesigual . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 127
+
+state 82
+
+    (36) ARIT -> ARIT TkDiv . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 128
+
+state 83
+
+    (44) BOOL -> ARIT TkMenor . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 129
+
+state 84
+
+    (46) BOOL -> ARIT TkMayor . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 130
+
+state 85
+
+    (33) ARIT -> ARIT TkSuma . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 131
+
+state 86
+
+    (35) ARIT -> ARIT TkMult . ARIT
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 132
+
+state 87
+
+    (42) BOOL -> BOOL TkConjuncion . BOOL
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkParAbre       shift and go to state 33
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+    TkId            shift and go to state 37
+    TkNum           shift and go to state 28
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    BOOL                           shift and go to state 133
+    ARRAY                          shift and go to state 38
+    ARIT                           shift and go to state 35
+
+state 88
+
+    (63) INDETER -> TkWhile BOOL TkHacer . INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 134
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 89
+
+    (43) BOOL -> BOOL TkDisyuncion . BOOL
+    (42) BOOL -> . BOOL TkConjuncion BOOL
+    (43) BOOL -> . BOOL TkDisyuncion BOOL
+    (44) BOOL -> . ARIT TkMenor ARIT
+    (45) BOOL -> . ARIT TkMenorIgual ARIT
+    (46) BOOL -> . ARIT TkMayor ARIT
+    (47) BOOL -> . ARIT TkMayorIgual ARIT
+    (48) BOOL -> . ARIT TkIgual ARIT
+    (49) BOOL -> . ARIT TkDesigual ARIT
+    (50) BOOL -> . TkParAbre BOOL TkParCierra
+    (51) BOOL -> . TkFalse
+    (52) BOOL -> . TkTrue
+    (53) BOOL -> . TkNegacion BOOL
+    (54) BOOL -> . TkId
+    (55) BOOL -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkParAbre       shift and go to state 33
+    TkFalse         shift and go to state 27
+    TkTrue          shift and go to state 29
+    TkNegacion      shift and go to state 31
+    TkId            shift and go to state 37
+    TkNum           shift and go to state 28
+    TkValorAscii    shift and go to state 30
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    BOOL                           shift and go to state 135
+    ARRAY                          shift and go to state 38
+    ARIT                           shift and go to state 35
+
+state 90
+
+    (55) BOOL -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (40) ARIT -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 136
+
+state 91
+
+    (74) ARRAY -> ARRAY TkConcatenacion . ARRAY
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkShift         shift and go to state 34
+    TkId            shift and go to state 75
+    TkParAbre       shift and go to state 73
+
+    ARRAY                          shift and go to state 137
+
+state 92
+
+    (64) DETER -> TkFor TkId TkFrom . ARIT TkTo ARIT DETER0
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 138
+
+state 93
+
+    (67) I_O -> TkRead TkId TkPuntoYComa .
+
+    TkId            reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkRead          reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkPrint         reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkIf            reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkFor           reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkWhile         reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkWith          reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkBegin         reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkEnd           reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+    TkOtherwise     reduce using rule 67 (I_O -> TkRead TkId TkPuntoYComa .)
+
+
+state 94
+
+    (60) CHAR -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (40) ARIT -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (55) BOOL -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 139
+
+state 95
+
+    (78) ARRAY -> TkParAbre ARRAY . TkParCierra
+    (40) ARIT -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (55) BOOL -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkParCierra     shift and go to state 117
+    TkCorcheteAbre  shift and go to state 140
+    TkConcatenacion shift and go to state 91
+
+
+state 96
+
+    (32) ARIT -> TkParAbre ARIT . TkParCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+    (44) BOOL -> ARIT . TkMenor ARIT
+    (45) BOOL -> ARIT . TkMenorIgual ARIT
+    (46) BOOL -> ARIT . TkMayor ARIT
+    (47) BOOL -> ARIT . TkMayorIgual ARIT
+    (48) BOOL -> ARIT . TkIgual ARIT
+    (49) BOOL -> ARIT . TkDesigual ARIT
+
+    TkParCierra     shift and go to state 118
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+    TkMenor         shift and go to state 83
+    TkMenorIgual    shift and go to state 80
+    TkMayor         shift and go to state 84
+    TkMayorIgual    shift and go to state 76
+    TkIgual         shift and go to state 77
+    TkDesigual      shift and go to state 81
+
+
+state 97
+
+    (39) ARIT -> TkId .
+    (77) ARRAY -> TkId .
+    (54) BOOL -> TkId .
+
+  ! reduce/reduce conflict for TkParCierra resolved using rule 39 (ARIT -> TkId .)
+  ! reduce/reduce conflict for TkParCierra resolved using rule 39 (ARIT -> TkId .)
+    TkParCierra     reduce using rule 39 (ARIT -> TkId .)
+    TkSuma          reduce using rule 39 (ARIT -> TkId .)
+    TkResta         reduce using rule 39 (ARIT -> TkId .)
+    TkMult          reduce using rule 39 (ARIT -> TkId .)
+    TkDiv           reduce using rule 39 (ARIT -> TkId .)
+    TkMod           reduce using rule 39 (ARIT -> TkId .)
+    TkMenor         reduce using rule 39 (ARIT -> TkId .)
+    TkMenorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkMayor         reduce using rule 39 (ARIT -> TkId .)
+    TkMayorIgual    reduce using rule 39 (ARIT -> TkId .)
+    TkIgual         reduce using rule 39 (ARIT -> TkId .)
+    TkDesigual      reduce using rule 39 (ARIT -> TkId .)
+    TkCorcheteAbre  reduce using rule 77 (ARRAY -> TkId .)
+    TkConcatenacion reduce using rule 77 (ARRAY -> TkId .)
+    TkConjuncion    reduce using rule 54 (BOOL -> TkId .)
+    TkDisyuncion    reduce using rule 54 (BOOL -> TkId .)
+
+  ! TkParCierra     [ reduce using rule 77 (ARRAY -> TkId .) ]
+  ! TkParCierra     [ reduce using rule 54 (BOOL -> TkId .) ]
+
+
+state 98
+
+    (58) CHAR -> CHAR TkAnteriorCar .
+
+    TkSiguienteCar  reduce using rule 58 (CHAR -> CHAR TkAnteriorCar .)
+    TkAnteriorCar   reduce using rule 58 (CHAR -> CHAR TkAnteriorCar .)
+    TkDosPuntos     reduce using rule 58 (CHAR -> CHAR TkAnteriorCar .)
+    TkComa          reduce using rule 58 (CHAR -> CHAR TkAnteriorCar .)
+    TkPuntoYComa    reduce using rule 58 (CHAR -> CHAR TkAnteriorCar .)
+
+
+state 99
+
+    (57) CHAR -> CHAR TkSiguienteCar .
+
+    TkSiguienteCar  reduce using rule 57 (CHAR -> CHAR TkSiguienteCar .)
+    TkAnteriorCar   reduce using rule 57 (CHAR -> CHAR TkSiguienteCar .)
+    TkDosPuntos     reduce using rule 57 (CHAR -> CHAR TkSiguienteCar .)
+    TkComa          reduce using rule 57 (CHAR -> CHAR TkSiguienteCar .)
+    TkPuntoYComa    reduce using rule 57 (CHAR -> CHAR TkSiguienteCar .)
+
+
+state 100
+
+    (68) I_O -> TkPrint EXPR TkPuntoYComa .
+
+    TkId            reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkRead          reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkPrint         reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkIf            reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkFor           reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkWhile         reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkWith          reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkBegin         reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkEnd           reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+    TkOtherwise     reduce using rule 68 (I_O -> TkPrint EXPR TkPuntoYComa .)
+
+
+state 101
+
+    (29) ASIG -> TkId TkAsignacion EXPR . TkPuntoYComa
+
+    TkPuntoYComa    shift and go to state 141
+
+
+state 102
+
+    (28) PUNTO -> TkId TkPunto ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkId            reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkRead          reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkPrint         reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkIf            reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkFor           reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkWhile         reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkWith          reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkBegin         reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkEnd           reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkOtherwise     reduce using rule 28 (PUNTO -> TkId TkPunto ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 103
+
+    (61) COND -> TkIf BOOL TkHacer . INSTR TkEnd
+    (62) COND -> TkIf BOOL TkHacer . INSTR TkOtherwise TkHacer INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 142
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 104
+
+    (5) DEC0 -> IDENT TkDosPuntos . TIPO
+    (10) TIPO -> . TkInt
+    (11) TIPO -> . TkChar
+    (12) TIPO -> . TkBool
+    (13) TIPO -> . TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO
+
+    TkInt           shift and go to state 106
+    TkChar          shift and go to state 110
+    TkBool          shift and go to state 108
+    TkArray         shift and go to state 109
+
+    TIPO                           shift and go to state 143
+
+state 105
+
+    (1) INICIO -> TkWith DEC TkBegin INSTR TkEnd .
+
+    TkId            reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkRead          reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkPrint         reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkIf            reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkFor           reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkWhile         reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkWith          reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkBegin         reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkEnd           reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    TkOtherwise     reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+    $end            reduce using rule 1 (INICIO -> TkWith DEC TkBegin INSTR TkEnd .)
+
+
+state 106
+
+    (10) TIPO -> TkInt .
+
+    TkBegin         reduce using rule 10 (TIPO -> TkInt .)
+    TkVar           reduce using rule 10 (TIPO -> TkInt .)
+
+
+state 107
+
+    (4) DEC -> TkVar IDENT TkDosPuntos TIPO .
+
+    TkBegin         reduce using rule 4 (DEC -> TkVar IDENT TkDosPuntos TIPO .)
+    TkVar           reduce using rule 4 (DEC -> TkVar IDENT TkDosPuntos TIPO .)
+
+
+state 108
+
+    (12) TIPO -> TkBool .
+
+    TkBegin         reduce using rule 12 (TIPO -> TkBool .)
+    TkVar           reduce using rule 12 (TIPO -> TkBool .)
+
+
+state 109
+
+    (13) TIPO -> TkArray . TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO
+
+    TkCorcheteAbre  shift and go to state 144
+
+
+state 110
+
+    (11) TIPO -> TkChar .
+
+    TkBegin         reduce using rule 11 (TIPO -> TkChar .)
+    TkVar           reduce using rule 11 (TIPO -> TkChar .)
+
+
+state 111
+
+    (9) IDENT -> IDENT TkComa ASIG_ID .
+
+    TkDosPuntos     reduce using rule 9 (IDENT -> IDENT TkComa ASIG_ID .)
+    TkComa          reduce using rule 9 (IDENT -> IDENT TkComa ASIG_ID .)
+
+
+state 112
+
+    (8) IDENT -> IDENT TkComa TkId .
+    (30) ASIG_ID -> TkId . TkAsignacion EXPR
+
+    TkDosPuntos     reduce using rule 8 (IDENT -> IDENT TkComa TkId .)
+    TkComa          reduce using rule 8 (IDENT -> IDENT TkComa TkId .)
+    TkAsignacion    shift and go to state 63
+
+
+state 113
+
+    (30) ASIG_ID -> TkId TkAsignacion EXPR .
+
+    TkDosPuntos     reduce using rule 30 (ASIG_ID -> TkId TkAsignacion EXPR .)
+    TkComa          reduce using rule 30 (ASIG_ID -> TkId TkAsignacion EXPR .)
+
+
+state 114
+
+    (32) ARIT -> TkParAbre ARIT . TkParCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkParCierra     shift and go to state 118
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 115
+
+    (78) ARRAY -> TkParAbre ARRAY . TkParCierra
+    (40) ARIT -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkParCierra     shift and go to state 117
+    TkCorcheteAbre  shift and go to state 116
+    TkConcatenacion shift and go to state 91
+
+
+state 116
+
+    (40) ARIT -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 145
+
+state 117
+
+    (78) ARRAY -> TkParAbre ARRAY TkParCierra .
+
+    TkCorcheteAbre  reduce using rule 78 (ARRAY -> TkParAbre ARRAY TkParCierra .)
+    TkConcatenacion reduce using rule 78 (ARRAY -> TkParAbre ARRAY TkParCierra .)
+    TkPuntoYComa    reduce using rule 78 (ARRAY -> TkParAbre ARRAY TkParCierra .)
+    TkDosPuntos     reduce using rule 78 (ARRAY -> TkParAbre ARRAY TkParCierra .)
+    TkComa          reduce using rule 78 (ARRAY -> TkParAbre ARRAY TkParCierra .)
+    TkParCierra     reduce using rule 78 (ARRAY -> TkParAbre ARRAY TkParCierra .)
+
+
+state 118
+
+    (32) ARIT -> TkParAbre ARIT TkParCierra .
+
+    TkCorcheteCierra reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkSuma          reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkResta         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkMult          reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkDiv           reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkMod           reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkMenor         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkMenorIgual    reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkMayor         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkMayorIgual    reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkIgual         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkDesigual      reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkPuntoYComa    reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkParCierra     reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkId            reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkRead          reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkPrint         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkIf            reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkFor           reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkWhile         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkWith          reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkBegin         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkEnd           reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkOtherwise     reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkDosPuntos     reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkComa          reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkHacer         reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkConjuncion    reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkDisyuncion    reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkTo            reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+    TkStep          reduce using rule 32 (ARIT -> TkParAbre ARIT TkParCierra .)
+
+
+state 119
+
+    (50) BOOL -> TkParAbre BOOL TkParCierra .
+
+    TkConjuncion    reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+    TkDisyuncion    reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+    TkPuntoYComa    reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+    TkHacer         reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+    TkParCierra     reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+    TkDosPuntos     reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+    TkComa          reduce using rule 50 (BOOL -> TkParAbre BOOL TkParCierra .)
+
+
+state 120
+
+    (78) ARRAY -> TkParAbre ARRAY . TkParCierra
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkParCierra     shift and go to state 117
+    TkConcatenacion shift and go to state 91
+    TkCorcheteAbre  shift and go to state 121
+
+
+state 121
+
+    (76) ARRAY -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 146
+
+state 122
+
+    (47) BOOL -> ARIT TkMayorIgual ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkConjuncion    reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkDisyuncion    reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkPuntoYComa    reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkHacer         reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkParCierra     reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkDosPuntos     reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkComa          reduce using rule 47 (BOOL -> ARIT TkMayorIgual ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 123
+
+    (48) BOOL -> ARIT TkIgual ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkConjuncion    reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkDisyuncion    reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkPuntoYComa    reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkHacer         reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkParCierra     reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkDosPuntos     reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkComa          reduce using rule 48 (BOOL -> ARIT TkIgual ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 124
+
+    (34) ARIT -> ARIT TkResta ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkSuma          reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkResta         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkMenor         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkMenorIgual    reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkMayor         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkMayorIgual    reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkIgual         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkDesigual      reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkPuntoYComa    reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkParCierra     reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkId            reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkRead          reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkPrint         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkIf            reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkFor           reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkWhile         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkWith          reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkBegin         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkEnd           reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkOtherwise     reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkDosPuntos     reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkComa          reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkHacer         reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkConjuncion    reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkDisyuncion    reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkTo            reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkStep          reduce using rule 34 (ARIT -> ARIT TkResta ARIT .)
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+  ! TkMult          [ reduce using rule 34 (ARIT -> ARIT TkResta ARIT .) ]
+  ! TkDiv           [ reduce using rule 34 (ARIT -> ARIT TkResta ARIT .) ]
+  ! TkMod           [ reduce using rule 34 (ARIT -> ARIT TkResta ARIT .) ]
+  ! TkSuma          [ shift and go to state 85 ]
+  ! TkResta         [ shift and go to state 78 ]
+
+
+state 125
+
+    (37) ARIT -> ARIT TkMod ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkSuma          reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkResta         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkMult          reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkDiv           reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkMod           reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkMenor         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkMenorIgual    reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkMayor         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkMayorIgual    reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkIgual         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkDesigual      reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkPuntoYComa    reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkParCierra     reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkId            reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkRead          reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkPrint         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkIf            reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkFor           reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkWhile         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkWith          reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkBegin         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkEnd           reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkOtherwise     reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkDosPuntos     reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkComa          reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkHacer         reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkConjuncion    reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkDisyuncion    reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkTo            reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+    TkStep          reduce using rule 37 (ARIT -> ARIT TkMod ARIT .)
+
+  ! TkSuma          [ shift and go to state 85 ]
+  ! TkResta         [ shift and go to state 78 ]
+  ! TkMult          [ shift and go to state 86 ]
+  ! TkDiv           [ shift and go to state 82 ]
+  ! TkMod           [ shift and go to state 79 ]
+
+
+state 126
+
+    (45) BOOL -> ARIT TkMenorIgual ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkConjuncion    reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkDisyuncion    reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkPuntoYComa    reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkHacer         reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkParCierra     reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkDosPuntos     reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkComa          reduce using rule 45 (BOOL -> ARIT TkMenorIgual ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 127
+
+    (49) BOOL -> ARIT TkDesigual ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkConjuncion    reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkDisyuncion    reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkPuntoYComa    reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkHacer         reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkParCierra     reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkDosPuntos     reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkComa          reduce using rule 49 (BOOL -> ARIT TkDesigual ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 128
+
+    (36) ARIT -> ARIT TkDiv ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkSuma          reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkResta         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkMult          reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkDiv           reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkMod           reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkMenor         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkMenorIgual    reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkMayor         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkMayorIgual    reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkIgual         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkDesigual      reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkPuntoYComa    reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkParCierra     reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkId            reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkRead          reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkPrint         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkIf            reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkFor           reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkWhile         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkWith          reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkBegin         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkEnd           reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkOtherwise     reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkDosPuntos     reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkComa          reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkHacer         reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkConjuncion    reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkDisyuncion    reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkTo            reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+    TkStep          reduce using rule 36 (ARIT -> ARIT TkDiv ARIT .)
+
+  ! TkSuma          [ shift and go to state 85 ]
+  ! TkResta         [ shift and go to state 78 ]
+  ! TkMult          [ shift and go to state 86 ]
+  ! TkDiv           [ shift and go to state 82 ]
+  ! TkMod           [ shift and go to state 79 ]
+
+
+state 129
+
+    (44) BOOL -> ARIT TkMenor ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkConjuncion    reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkDisyuncion    reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkPuntoYComa    reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkHacer         reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkParCierra     reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkDosPuntos     reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkComa          reduce using rule 44 (BOOL -> ARIT TkMenor ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 130
+
+    (46) BOOL -> ARIT TkMayor ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkConjuncion    reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkDisyuncion    reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkPuntoYComa    reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkHacer         reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkParCierra     reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkDosPuntos     reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkComa          reduce using rule 46 (BOOL -> ARIT TkMayor ARIT .)
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 131
+
+    (33) ARIT -> ARIT TkSuma ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkSuma          reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkResta         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkMenor         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkMenorIgual    reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkMayor         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkMayorIgual    reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkIgual         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkDesigual      reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkPuntoYComa    reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkParCierra     reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkId            reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkRead          reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkPrint         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkIf            reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkFor           reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkWhile         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkWith          reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkBegin         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkEnd           reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkOtherwise     reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkDosPuntos     reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkComa          reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkHacer         reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkConjuncion    reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkDisyuncion    reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkTo            reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkStep          reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .)
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+  ! TkMult          [ reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .) ]
+  ! TkDiv           [ reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .) ]
+  ! TkMod           [ reduce using rule 33 (ARIT -> ARIT TkSuma ARIT .) ]
+  ! TkSuma          [ shift and go to state 85 ]
+  ! TkResta         [ shift and go to state 78 ]
+
+
+state 132
+
+    (35) ARIT -> ARIT TkMult ARIT .
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkSuma          reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkResta         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkMult          reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkDiv           reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkMod           reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkMenor         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkMenorIgual    reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkMayor         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkMayorIgual    reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkIgual         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkDesigual      reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkPuntoYComa    reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkParCierra     reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkId            reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkRead          reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkPrint         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkIf            reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkFor           reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkWhile         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkWith          reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkBegin         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkEnd           reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkOtherwise     reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkDosPuntos     reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkComa          reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkHacer         reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkConjuncion    reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkDisyuncion    reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkTo            reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+    TkStep          reduce using rule 35 (ARIT -> ARIT TkMult ARIT .)
+
+  ! TkSuma          [ shift and go to state 85 ]
+  ! TkResta         [ shift and go to state 78 ]
+  ! TkMult          [ shift and go to state 86 ]
+  ! TkDiv           [ shift and go to state 82 ]
+  ! TkMod           [ shift and go to state 79 ]
+
+
+state 133
+
+    (42) BOOL -> BOOL TkConjuncion BOOL .
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkConjuncion    reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+    TkDisyuncion    reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+    TkPuntoYComa    reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+    TkHacer         reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+    TkParCierra     reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+    TkDosPuntos     reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+    TkComa          reduce using rule 42 (BOOL -> BOOL TkConjuncion BOOL .)
+
+  ! TkConjuncion    [ shift and go to state 87 ]
+  ! TkDisyuncion    [ shift and go to state 89 ]
+
+
+state 134
+
+    (63) INDETER -> TkWhile BOOL TkHacer INSTR . TkEnd
+
+    TkEnd           shift and go to state 147
+
+
+state 135
+
+    (43) BOOL -> BOOL TkDisyuncion BOOL .
+    (42) BOOL -> BOOL . TkConjuncion BOOL
+    (43) BOOL -> BOOL . TkDisyuncion BOOL
+
+    TkConjuncion    reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+    TkDisyuncion    reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+    TkPuntoYComa    reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+    TkHacer         reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+    TkParCierra     reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+    TkDosPuntos     reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+    TkComa          reduce using rule 43 (BOOL -> BOOL TkDisyuncion BOOL .)
+
+  ! TkConjuncion    [ shift and go to state 87 ]
+  ! TkDisyuncion    [ shift and go to state 89 ]
+
+
+state 136
+
+    (55) BOOL -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra shift and go to state 148
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 137
+
+    (74) ARRAY -> ARRAY TkConcatenacion ARRAY .
+    (74) ARRAY -> ARRAY . TkConcatenacion ARRAY
+    (76) ARRAY -> ARRAY . TkCorcheteAbre ARIT TkCorcheteCierra
+
+    TkConcatenacion reduce using rule 74 (ARRAY -> ARRAY TkConcatenacion ARRAY .)
+    TkPuntoYComa    reduce using rule 74 (ARRAY -> ARRAY TkConcatenacion ARRAY .)
+    TkDosPuntos     reduce using rule 74 (ARRAY -> ARRAY TkConcatenacion ARRAY .)
+    TkComa          reduce using rule 74 (ARRAY -> ARRAY TkConcatenacion ARRAY .)
+    TkParCierra     reduce using rule 74 (ARRAY -> ARRAY TkConcatenacion ARRAY .)
+    TkCorcheteAbre  shift and go to state 121
+
+  ! TkCorcheteAbre  [ reduce using rule 74 (ARRAY -> ARRAY TkConcatenacion ARRAY .) ]
+  ! TkConcatenacion [ shift and go to state 91 ]
+
+
+state 138
+
+    (64) DETER -> TkFor TkId TkFrom ARIT . TkTo ARIT DETER0
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkTo            shift and go to state 149
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 139
+
+    (60) CHAR -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (55) BOOL -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra shift and go to state 150
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 140
+
+    (40) ARIT -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (55) BOOL -> ARRAY TkCorcheteAbre . ARIT TkCorcheteCierra
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 151
+
+state 141
+
+    (29) ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .
+
+    TkId            reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkRead          reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkPrint         reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkIf            reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkFor           reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkWhile         reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkWith          reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkBegin         reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkEnd           reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+    TkOtherwise     reduce using rule 29 (ASIG -> TkId TkAsignacion EXPR TkPuntoYComa .)
+
+
+state 142
+
+    (61) COND -> TkIf BOOL TkHacer INSTR . TkEnd
+    (62) COND -> TkIf BOOL TkHacer INSTR . TkOtherwise TkHacer INSTR TkEnd
+
+    TkEnd           shift and go to state 153
+    TkOtherwise     shift and go to state 152
+
+
+state 143
+
+    (5) DEC0 -> IDENT TkDosPuntos TIPO .
+
+    TkBegin         reduce using rule 5 (DEC0 -> IDENT TkDosPuntos TIPO .)
+    TkVar           reduce using rule 5 (DEC0 -> IDENT TkDosPuntos TIPO .)
+
+
+state 144
+
+    (13) TIPO -> TkArray TkCorcheteAbre . ARIT TkCorcheteCierra TkOf TIPO
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARIT                           shift and go to state 154
+    ARRAY                          shift and go to state 69
+
+state 145
+
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra shift and go to state 155
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 146
+
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra shift and go to state 156
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 147
+
+    (63) INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .
+
+    TkId            reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkRead          reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkPrint         reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkIf            reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkFor           reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkWhile         reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkWith          reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkBegin         reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkEnd           reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+    TkOtherwise     reduce using rule 63 (INDETER -> TkWhile BOOL TkHacer INSTR TkEnd .)
+
+
+state 148
+
+    (55) BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+
+  ! reduce/reduce conflict for TkParCierra resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkParCierra resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConjuncion    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDisyuncion    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkHacer         reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkPuntoYComa    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDosPuntos     reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkComa          reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkIgual         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDesigual      reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkSuma          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkResta         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMult          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDiv           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMod           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkParCierra     reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkCorcheteAbre  reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConcatenacion reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+
+  ! TkParCierra     [ reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkParCierra     [ reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+
+
+state 149
+
+    (64) DETER -> TkFor TkId TkFrom ARIT TkTo . ARIT DETER0
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 157
+
+state 150
+
+    (60) CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (55) BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkComa resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkComa resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkPuntoYComa resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkDosPuntos resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkComa resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkSiguienteCar  reduce using rule 60 (CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkAnteriorCar   reduce using rule 60 (CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkSuma          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkResta         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMult          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDiv           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMod           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkIgual         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDesigual      reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkPuntoYComa    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDosPuntos     reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkComa          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkCorcheteAbre  reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConcatenacion reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConjuncion    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDisyuncion    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+
+  ! TkDosPuntos     [ reduce using rule 60 (CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkComa          [ reduce using rule 60 (CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkPuntoYComa    [ reduce using rule 60 (CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkPuntoYComa    [ reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkDosPuntos     [ reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkComa          [ reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkPuntoYComa    [ reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkDosPuntos     [ reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkComa          [ reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+
+
+state 151
+
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (55) BOOL -> ARRAY TkCorcheteAbre ARIT . TkCorcheteCierra
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra shift and go to state 158
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 152
+
+    (62) COND -> TkIf BOOL TkHacer INSTR TkOtherwise . TkHacer INSTR TkEnd
+
+    TkHacer         shift and go to state 159
+
+
+state 153
+
+    (61) COND -> TkIf BOOL TkHacer INSTR TkEnd .
+
+    TkId            reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkRead          reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkPrint         reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkIf            reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkFor           reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkWhile         reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkWith          reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkBegin         reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkEnd           reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+    TkOtherwise     reduce using rule 61 (COND -> TkIf BOOL TkHacer INSTR TkEnd .)
+
+
+state 154
+
+    (13) TIPO -> TkArray TkCorcheteAbre ARIT . TkCorcheteCierra TkOf TIPO
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkCorcheteCierra shift and go to state 160
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 155
+
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+
+  ! reduce/reduce conflict for TkParCierra resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkCorcheteCierra reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkSuma          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkResta         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMult          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDiv           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMod           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkIgual         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDesigual      reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkPuntoYComa    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkParCierra     reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkId            reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkRead          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkPrint         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkIf            reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkFor           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkWhile         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkWith          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkBegin         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkEnd           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkOtherwise     reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDosPuntos     reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkComa          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkHacer         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConjuncion    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDisyuncion    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkTo            reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkStep          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkCorcheteAbre  reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConcatenacion reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+
+  ! TkParCierra     [ reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+
+
+state 156
+
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+
+    TkConcatenacion reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkCorcheteAbre  reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkPuntoYComa    reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkParCierra     reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDosPuntos     reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkComa          reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+
+
+state 157
+
+    (64) DETER -> TkFor TkId TkFrom ARIT TkTo ARIT . DETER0
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+    (65) DETER0 -> . TkStep ARIT TkHacer INSTR TkEnd
+    (66) DETER0 -> . TkHacer INSTR TkEnd
+
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+    TkStep          shift and go to state 162
+    TkHacer         shift and go to state 161
+
+    DETER0                         shift and go to state 163
+
+state 158
+
+    (40) ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (76) ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+    (55) BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .
+
+  ! reduce/reduce conflict for TkParCierra resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+  ! reduce/reduce conflict for TkParCierra resolved using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkParCierra     reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkSuma          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkResta         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMult          reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDiv           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMod           reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMenorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayor         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkMayorIgual    reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkIgual         reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDesigual      reduce using rule 40 (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkCorcheteAbre  reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConcatenacion reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkConjuncion    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+    TkDisyuncion    reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .)
+
+  ! TkParCierra     [ reduce using rule 76 (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+  ! TkParCierra     [ reduce using rule 55 (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra .) ]
+
+
+state 159
+
+    (62) COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer . INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 164
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 160
+
+    (13) TIPO -> TkArray TkCorcheteAbre ARIT TkCorcheteCierra . TkOf TIPO
+
+    TkOf            shift and go to state 165
+
+
+state 161
+
+    (66) DETER0 -> TkHacer . INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 166
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 162
+
+    (65) DETER0 -> TkStep . ARIT TkHacer INSTR TkEnd
+    (31) ARIT -> . TkNum
+    (32) ARIT -> . TkParAbre ARIT TkParCierra
+    (33) ARIT -> . ARIT TkSuma ARIT
+    (34) ARIT -> . ARIT TkResta ARIT
+    (35) ARIT -> . ARIT TkMult ARIT
+    (36) ARIT -> . ARIT TkDiv ARIT
+    (37) ARIT -> . ARIT TkMod ARIT
+    (38) ARIT -> . TkValorAscii TkCaracter
+    (39) ARIT -> . TkId
+    (40) ARIT -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (41) ARIT -> . TkResta ARIT
+    (74) ARRAY -> . ARRAY TkConcatenacion ARRAY
+    (75) ARRAY -> . TkShift ARRAY
+    (76) ARRAY -> . ARRAY TkCorcheteAbre ARIT TkCorcheteCierra
+    (77) ARRAY -> . TkId
+    (78) ARRAY -> . TkParAbre ARRAY TkParCierra
+
+    TkNum           shift and go to state 28
+    TkParAbre       shift and go to state 66
+    TkValorAscii    shift and go to state 30
+    TkId            shift and go to state 68
+    TkResta         shift and go to state 32
+    TkShift         shift and go to state 34
+
+    ARRAY                          shift and go to state 69
+    ARIT                           shift and go to state 167
+
+state 163
+
+    (64) DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .
+
+    TkId            reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkRead          reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkPrint         reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkIf            reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkFor           reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkWhile         reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkWith          reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkBegin         reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkEnd           reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+    TkOtherwise     reduce using rule 64 (DETER -> TkFor TkId TkFrom ARIT TkTo ARIT DETER0 .)
+
+
+state 164
+
+    (62) COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR . TkEnd
+
+    TkEnd           shift and go to state 168
+
+
+state 165
+
+    (13) TIPO -> TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf . TIPO
+    (10) TIPO -> . TkInt
+    (11) TIPO -> . TkChar
+    (12) TIPO -> . TkBool
+    (13) TIPO -> . TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO
+
+    TkInt           shift and go to state 106
+    TkChar          shift and go to state 110
+    TkBool          shift and go to state 108
+    TkArray         shift and go to state 109
+
+    TIPO                           shift and go to state 169
+
+state 166
+
+    (66) DETER0 -> TkHacer INSTR . TkEnd
+
+    TkEnd           shift and go to state 170
+
+
+state 167
+
+    (65) DETER0 -> TkStep ARIT . TkHacer INSTR TkEnd
+    (33) ARIT -> ARIT . TkSuma ARIT
+    (34) ARIT -> ARIT . TkResta ARIT
+    (35) ARIT -> ARIT . TkMult ARIT
+    (36) ARIT -> ARIT . TkDiv ARIT
+    (37) ARIT -> ARIT . TkMod ARIT
+
+    TkHacer         shift and go to state 171
+    TkSuma          shift and go to state 85
+    TkResta         shift and go to state 78
+    TkMult          shift and go to state 86
+    TkDiv           shift and go to state 82
+    TkMod           shift and go to state 79
+
+
+state 168
+
+    (62) COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .
+
+    TkId            reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkRead          reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkPrint         reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkIf            reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkFor           reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkWhile         reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkWith          reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkBegin         reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkEnd           reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+    TkOtherwise     reduce using rule 62 (COND -> TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd .)
+
+
+state 169
+
+    (13) TIPO -> TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO .
+
+    TkBegin         reduce using rule 13 (TIPO -> TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO .)
+    TkVar           reduce using rule 13 (TIPO -> TkArray TkCorcheteAbre ARIT TkCorcheteCierra TkOf TIPO .)
+
+
+state 170
+
+    (66) DETER0 -> TkHacer INSTR TkEnd .
+
+    TkId            reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkRead          reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkPrint         reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkIf            reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkFor           reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkWhile         reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkWith          reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkBegin         reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkEnd           reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+    TkOtherwise     reduce using rule 66 (DETER0 -> TkHacer INSTR TkEnd .)
+
+
+state 171
+
+    (65) DETER0 -> TkStep ARIT TkHacer . INSTR TkEnd
+    (14) INSTR -> . ASIG
+    (15) INSTR -> . I_O
+    (16) INSTR -> . COND
+    (17) INSTR -> . DETER
+    (18) INSTR -> . INDETER
+    (19) INSTR -> . INICIO
+    (20) INSTR -> . PUNTO
+    (21) INSTR -> . ASIG INSTR
+    (22) INSTR -> . I_O INSTR
+    (23) INSTR -> . INICIO INSTR
+    (24) INSTR -> . DETER INSTR
+    (25) INSTR -> . INDETER INSTR
+    (26) INSTR -> . COND INSTR
+    (27) INSTR -> . PUNTO INSTR
+    (29) ASIG -> . TkId TkAsignacion EXPR TkPuntoYComa
+    (67) I_O -> . TkRead TkId TkPuntoYComa
+    (68) I_O -> . TkPrint EXPR TkPuntoYComa
+    (61) COND -> . TkIf BOOL TkHacer INSTR TkEnd
+    (62) COND -> . TkIf BOOL TkHacer INSTR TkOtherwise TkHacer INSTR TkEnd
+    (64) DETER -> . TkFor TkId TkFrom ARIT TkTo ARIT DETER0
+    (63) INDETER -> . TkWhile BOOL TkHacer INSTR TkEnd
+    (1) INICIO -> . TkWith DEC TkBegin INSTR TkEnd
+    (2) INICIO -> . TkBegin INSTR TkEnd
+    (28) PUNTO -> . TkId TkPunto ARIT
+
+    TkId            shift and go to state 15
+    TkRead          shift and go to state 11
+    TkPrint         shift and go to state 13
+    TkIf            shift and go to state 16
+    TkFor           shift and go to state 10
+    TkWhile         shift and go to state 8
+    TkWith          shift and go to state 1
+    TkBegin         shift and go to state 3
+
+    I_O                            shift and go to state 6
+    INSTR                          shift and go to state 172
+    PUNTO                          shift and go to state 9
+    ASIG                           shift and go to state 18
+    DETER                          shift and go to state 17
+    INICIO                         shift and go to state 12
+    INDETER                        shift and go to state 19
+    COND                           shift and go to state 14
+
+state 172
+
+    (65) DETER0 -> TkStep ARIT TkHacer INSTR . TkEnd
+
+    TkEnd           shift and go to state 173
+
+
+state 173
+
+    (65) DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .
+
+    TkId            reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkRead          reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkPrint         reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkIf            reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkFor           reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkWhile         reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkWith          reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkBegin         reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkEnd           reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+    TkOtherwise     reduce using rule 65 (DETER0 -> TkStep ARIT TkHacer INSTR TkEnd .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 37 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (BOOL -> TkId) in state 37
+WARNING: reduce/reduce conflict in state 37 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (ARRAY -> TkId) in state 37
+WARNING: reduce/reduce conflict in state 48 resolved using rule (CHAR -> TkId)
+WARNING: rejected rule (EXPR -> TkId) in state 48
+WARNING: reduce/reduce conflict in state 48 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (CHAR -> TkId) in state 48
+WARNING: reduce/reduce conflict in state 48 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (ARRAY -> TkId) in state 48
+WARNING: reduce/reduce conflict in state 48 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (BOOL -> TkId) in state 48
+WARNING: reduce/reduce conflict in state 68 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (ARRAY -> TkId) in state 68
+WARNING: reduce/reduce conflict in state 97 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (ARRAY -> TkId) in state 97
+WARNING: reduce/reduce conflict in state 97 resolved using rule (ARIT -> TkId)
+WARNING: rejected rule (BOOL -> TkId) in state 97
+WARNING: reduce/reduce conflict in state 148 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 148
+WARNING: reduce/reduce conflict in state 148 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 148
+WARNING: reduce/reduce conflict in state 150 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (CHAR -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 150
+WARNING: reduce/reduce conflict in state 150 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 150
+WARNING: reduce/reduce conflict in state 150 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 150
+WARNING: reduce/reduce conflict in state 155 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 155
+WARNING: reduce/reduce conflict in state 158 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (ARRAY -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 158
+WARNING: reduce/reduce conflict in state 158 resolved using rule (ARIT -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra)
+WARNING: rejected rule (BOOL -> ARRAY TkCorcheteAbre ARIT TkCorcheteCierra) in state 158
+WARNING: Rule (EXPR -> TkId) is never reduced
