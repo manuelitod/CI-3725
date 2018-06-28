@@ -7,6 +7,7 @@
 import ply.lex as lex
 import ply.yacc as yacc
 import sys
+import re
 
 
 class InstrTree:
@@ -246,14 +247,35 @@ def p_ident(p):
 			| IDENT TkComa TkId
 			| IDENT TkComa ASIG_ID'''
 	global variables
+	count = 0
 	if (len(p) == 4):
 		if not(type(p[3]) is str):
 			p[0] = InstrTree("Identificadores", [p[1], p[3]], None)
 		else:
+			for i in total_variables:
+				for i in i[0].keys():
+					if (i == str(p[3])):
+						count = count + 1
+				for i in variables:
+					if (i == str(p[3])):
+						count = count + 1
+				if (count != 0):
+					print("Error: La variable " + str(p[3]) + " ha sido declarada mas de una vez.")
+					exit()
 			variables.append(p[3]) 
 			p[0] = InstrTree("Identificadores", [p[1], InstrTree("Identificador", None, p[3])], None)
 	else:
-		if (p[1] is not str):
+		if (type(p[1]) is str):
+			for i in total_variables:
+				for i in i[0].keys():
+					if (i == str(p[1])):
+						count = count + 1
+				for i in variables:
+					if (i == str(p[1])):
+						count = count + 1
+				if (count != 0):
+					print("Error: La variable " + str(p[1]) + " ha sido declarada mas de una vez.")
+					exit()
 			p[0] = InstrTree("Identificador", None, p[1])
 			variables.append(p[1])
 		else:
@@ -317,6 +339,17 @@ def p_asig(p):
 def p_asig_id(p):
 	'''ASIG_ID : TkId TkAsignacion EXPR'''
 	global variables
+	count = 0
+	for i in total_variables:
+		for i in i[0].keys():
+			if (i == str(p[1])):
+				count = count + 1
+		for i in variables:
+			if (i == str(p[1])):
+				count = count + 1
+		if (count != 0):
+			print("Error: La variable " + str(p[1]) + " ha sido declarada mas de una vez.")
+			exit()
 	p[0] = InstrTree("Declaracion de Asignacion", [InstrTree("Id", None, p[1]), p[3]], p[2])
 	variables.append(p[1])
 
@@ -415,33 +448,139 @@ def p_expr(p):
 			| TkTrue
 			| TkNegacion EXPR
 			| TkId'''
+	esta = False
+	global total_variables
+	global variables
+	global dic
 	if (len(p) == 2):
-		if (p[1] == 'TkId'):
-			p[0] = InstrTree("Identificador", None, p[1])
-		elif (p[1] == 'TkNum'):
-			p[0] = InstrTree("Numero", None, p[1])
-		elif (p[1] == 'TkCaracter'):
-			p[0] = InstrTree("Caracter", None, p[1])
-		elif (p[1] == 'TkTrue'):
-			p[0] = InstrTree("True", None, p[1])
-		else:
-			p[0] = InstrTree("False", None, p[1])
+		if (p[1] == 'true'):
+			p[0] = InstrTree("True", None, p[1], 'bool')
+		elif (p[1] == 'false'):
+			p[0] = InstrTree("False", None, p[1], 'bool')
+		elif (isinstance(p[1], int)):
+			p[0] = InstrTree("Numero", None, p[1], 'int')
+		else: 
+			caracter = re.compile('[\'][a-zA-Z_][\']|["][a-zA-Z_]["]')
+			if (caracter.match(p[1])):
+				p[0] = InstrTree("Caracter", None, p[1], 'char')
+
+			else:
+				print(str(len(total_variables)))
+				for i in total_variables:
+					print("EL tipo de i es: " + str(type(i)))
+					for j in i[0].keys():
+						if (j == p[1]):
+							tipo = i[0][j]
+							esta = True
+				for i in variables:
+					if (i == p[1]):
+						esta = True
+				if (esta == False):
+					print("La variable utilizada " + p[1] + " no fue declarada.")
+					exit()
+				p[0] = InstrTree("Identificador", None, p[1], tipo)
+
 	elif (len(p) == 3):
 		if (p[1] == "TkCaracter"):
-			p[0] = InstrTree("Expresion con Caracteres", [p[1]], p[2])
+			p[0] = InstrTree("Expresion con Caracteres", [p[1]], p[2], 'char')
 		elif (p[1] == "TkValorAscii"):
-			p[0] = InstrTree("Valor Ascii", [p[3]], p[2])
+			p[0] = InstrTree("Valor Ascii", [p[3]], p[2], 'int')
 		elif (p[1] == "TkShift"):
-			p[0] = InstrTree("Shift", [p[2]], p[1])
+			if ((p[2].tipo == 'array de Entero') or (p[2].tipo == 'array de Booleano') or (p[2].tipo == 'array de Caracter')):
+				p[0] = InstrTree("Shift", [p[2]], p[1], 'array')
+			else:
+				print("Error de tipo al hacer shft ")
 		else:
-			p[0] = InstrTree("Negacion", [p[2]], p[1])
+			if (p[2].tipo != 'bool'):
+				print("Error de tipo al negar " + str(p[1]))
+			p[0] = InstrTree("Negacion", [p[2]], p[1], 'bool')
 	elif (len(p) == 4):
 		if (p[1] == "("):
-			p[0] = InstrTree("Expresion", [p[2]], "()")
+			p[0] = InstrTree("Expresion", [p[2]], "()", p[2].tipo)
 		else:
-			p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2])
+			if (p[2] == '+'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al sumar " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'int')
+			elif (p[2] == '*'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al multiplicar " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'int')
+			elif (p[2] == '/'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al dividir " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'int')
+			elif (p[2] == '%'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al aplicar modulo con " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'int')
+			elif (p[2] == '-'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al restar " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'int')
+			elif (p[2] == '::'):
+				if (p[1].tipo == 'array de Entero'):
+					if ((p[1].tipo != 'array de Entero' and p[1].tipo != 'array de int') or (p[3].tipo != 'array de Entero' and p[3].tipo != 'array de int')):
+						print("Error de tipo al concatenar " + str(p[1]) + " y " + str(p[3]))
+						exit()
+					p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'array de Entero')
+				elif (p[1].tipo == 'array de Caracter'):
+					if ((p[1].tipo != 'array de char' and p[1].tipo != 'array de Caracter') or (p[3].tipo != 'array de char' and p[3].tipo != 'Caracter')):
+						print("Error de tipo al concatenar " + str(p[1]) + " y " + str(p[3]))
+						exit()
+					p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'array de Caracter')
+				elif (p[1].tipo == 'array de Booleano'):
+					if ((p[1].tipo != 'array de bool' and p[1].tipo != 'array de Booleano') or (p[3].tipo != 'array de bool' and p[3].tipo != 'array de Booleano')):
+						print("Error de tipo al concatenar " + str(p[1]) + " y " + str(p[3]))
+						exit()
+					p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'array de Booleano')
+			elif (p[2] == '\/'):
+				if ((p[1].tipo != 'bool'and p[1].tipo != 'Booleano') or (p[3].tipo != 'bool' and p[1].tipo != 'Booleano')):
+					print("Error de tipo al operar la disyuncion con " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '/'):
+				if ((p[1].tipo != 'bool'and p[1].tipo != 'Booleano') or (p[3].tipo != 'bool' and p[1].tipo != 'Booleano')):
+					print("Error de tipo al operar la disyuncion con " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '<'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al comparar " + str(p[1].stamp) + " y " + str(p[3].stamp))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '<='):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al comparar " + str(p[1].stamp) + " y " + str(p[3].stamp))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '>'):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al comparar " + str(p[1].tipo) + " y " + str(p[3].tipo))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '>='):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al comparar " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '='):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al comparar " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
+			elif (p[2] == '/='):
+				if ((p[1].tipo != 'int'and p[1].tipo != 'Entero') or (p[3].tipo != 'int' and p[1].tipo != 'Entero')):
+					print("Error de tipo al comparar " + str(p[1]) + " y " + str(p[3]))
+					exit()
+				p[0] = InstrTree("Operacion Binaria", [p[1], p[3]], p[2], 'bool')
 	else:
-		p[0] = InstrTree("Indexacion", [p[1], p[3]], "[]")
+		p[0] = InstrTree("Indexacion", [p[1], p[3]], "[]", 'array')
 
 
 # Deteccion de errores

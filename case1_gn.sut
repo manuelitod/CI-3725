@@ -1,17 +1,17 @@
 with
-var n, f1 <- 1, f2 <- 0 : int
-var x,y,z : array[m] of int
+var f, f1 <- 1, f2 <- 0 : int
+var x,y,z, n : array[3] of int
 begin
 hola.2*3
 read n;
-while n > 0 ->
+while f > 0 ->
 with
-var tmp : int
+var tmp, hola: int
 begin
 tmp <- f2;
-f2 <- f1;
-f1 <- f1 + tmp;
-n <- n - 1;
+f2 <- true;
+f1 <- f1 - tmp;
+safas <- f1 - 1;
 if x ->
     print hola;
 end
