@@ -465,9 +465,7 @@ def p_expr(p):
 				p[0] = InstrTree("Caracter", None, p[1], 'char')
 
 			else:
-				print(str(len(total_variables)))
 				for i in total_variables:
-					print("EL tipo de i es: " + str(type(i)))
 					for j in i[0].keys():
 						if (j == p[1]):
 							tipo = i[0][j]
@@ -613,8 +611,7 @@ tree = parser.parse(content)
 if tree != None:
 	print("---AST---")
 	tree.print_tree()
-print("La longitud de total_variables es: " + str(len(total_variables)))
-for i in total_variables:
-	print("La longitud de dict es: " + str(len(i)))
 
-print(total_variables)
+for i in total_variables:
+	for j in i[0]:
+		print("Variable: " + j + "  Tipo: " + i[0][j])
